@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">RunningApp</string>
+    <string name="Rozpocznij_trening">Rozpocznij Trening</string>
+    <string name="Dodaj_trening">Dodaj Trening</string>
+    <string name="Przeglądaj_dzienniczek">Przeglądaj Dzienniczek</string>
+    <string name="CzasBiegu">Czas Biegu</string>
+    <string name="Dystans">Dystans:</string>
+    <string name="SrednieTempo">Średnie Tempo:</string>
+    <string name="OstatniKm">Ostatni kilometr:</string>
+    <string name="Start">START</string>
+    <string name="Lap">LAP</string>
+    <string name="Stop">STOP</string>
+    <string name="sprawnosc">Sprawnościowy</string>
+    <string name="szybkosc">Elementy Szybkości</string>
+    <string name="sila">Siłowy</string>
+    <string name="sila_biegowa">Siła Biegowa</string>
+    <string name="czas_treningu">Czas Treningu:</string>
+    <string name="min">(min)</string>
+    <string name="tresc_treningu">Treść Treningu:</string>
+    <string name="obciazenie_laczne">Obciążenie:</string>
+    <string name="kg">(łącznie kg)</string>
+    <string name="metry">(m)</string>
+    <string name="data">Data Treningu:</string>
+    <string name="dataformat">(DD-MM-YYYY)</string>
+    <string name="Zapisz">Zapisz</string>
+    <string name="Komentarz">"Komentarz: "</string>
+    <string name="Dodaj_komentarz">Dodaj Komentarz</string>
+    <string name="Usun_trening">Usuń Trening</string>
+</resources>
