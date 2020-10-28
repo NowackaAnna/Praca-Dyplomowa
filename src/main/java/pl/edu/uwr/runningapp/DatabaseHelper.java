@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DB_NAME = "treningibaza2";
+    public static final String DB_NAME = "treningi_aplikacja";
     private static String DB_PATH = null;
     private static final int DB_VERSION = 1;
     public static final String TABLE_Twszystkie = "treningiwszystkie";

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class Dziennik extends AppCompatActivity {
     Integer ilosc_treningowB;
     Integer ilosc_treningow;
     Integer pozycja_w_tab;
-    int images[] = {};
+    int images[];
     Cursor TreningiUzupelniajace;
     Cursor WszystkieTreningi;
     Float fDystans;
@@ -61,32 +62,69 @@ public class Dziennik extends AppCompatActivity {
             throw sqle;
         }
         ilosc_treningow = mDBHelper.countWszystkieTreningi("treningiwszystkie",null,null,null,null,null,null);
-        Toast.makeText(getApplicationContext(),ilosc_treningow.toString(), Toast.LENGTH_LONG).show();
-        mRodzaje = new String[ilosc_treningow];
-        mDaty = new String[ilosc_treningow];
-        mDystanse = new String[ilosc_treningow];
-        mCzasy = new String[ilosc_treningow];
-        mIndeksy = new Integer[ilosc_treningow];
+        //Toast.makeText(getApplicationContext(),ilosc_treningow.toString(), Toast.LENGTH_LONG).show();
+        if(ilosc_treningow == 0){
+            mRodzaje = new String[1];
+            mDaty = new String[1];
+            mDystanse = new String[1];
+            mCzasy = new String[1];
+            mIndeksy = new Integer[1];
+            images = new int[1];
 
-        pozycja_w_tab = 0;
+            mRodzaje[0] = "Brak zapisanych treningów";
+            mDaty[0] = "0";
+            mDystanse[0] = "";
+            mCzasy[0]="0";
+            //mIndeksy[0] = -11001;
+            images[0] = R.drawable.emptyp;
+
+        }
+        else {
+            mRodzaje = new String[ilosc_treningow];
+            mDaty = new String[ilosc_treningow];
+            mDystanse = new String[ilosc_treningow];
+            mCzasy = new String[ilosc_treningow];
+            mIndeksy = new Integer[ilosc_treningow];
+            images = new int[ilosc_treningow];
+
+            pozycja_w_tab = 0;
 
 
-        WszystkieTreningi = mDBHelper.queryWszystkieTreningii("treningiwszystkie",null,null,null,null,null,null);
-        if (WszystkieTreningi.moveToFirst()) {
-            do {
-                mIndeksy[pozycja_w_tab] = WszystkieTreningi.getInt(0);
-                mDaty[pozycja_w_tab] = WszystkieTreningi.getString(1);
-                mRodzaje[pozycja_w_tab] = WszystkieTreningi.getString(2);
-                fDystans = WszystkieTreningi.getFloat(3);
-                tDystans = fDystans.toString();
-                mDystanse[pozycja_w_tab] = tDystans;
-                mCzasy[pozycja_w_tab] = WszystkieTreningi.getString(4);
-                pozycja_w_tab = pozycja_w_tab + 1;
-            } while (WszystkieTreningi.moveToNext());
+            WszystkieTreningi = mDBHelper.queryWszystkieTreningii("treningiwszystkie", null, null, null, null, null, null);
+            if (WszystkieTreningi.moveToFirst()) {
+                do {
+                    mIndeksy[pozycja_w_tab] = WszystkieTreningi.getInt(0);
+                    mDaty[pozycja_w_tab] = WszystkieTreningi.getString(1);
+                    mRodzaje[pozycja_w_tab] = WszystkieTreningi.getString(2);
+                    fDystans = WszystkieTreningi.getFloat(3);
+                    tDystans = fDystans.toString();
+                    mDystanse[pozycja_w_tab] = tDystans;
+                    mCzasy[pozycja_w_tab] = WszystkieTreningi.getString(4);
+                    pozycja_w_tab = pozycja_w_tab + 1;
+                } while (WszystkieTreningi.moveToNext());
+            }
+            for (int i = 0; i < ilosc_treningow; i++) {
+                if (mRodzaje[i].equals("Sprawnościowy")) {
+                    images[i] = R.drawable.sprawnoscp;
+                }
+                if (mRodzaje[i].equals("Siłowy")) {
+                    images[i] = R.drawable.silowaniap;
+                }
+                if (mRodzaje[i].equals("Siła Biegowa")) {
+                    images[i] = R.drawable.silabiegowap;
+                }
+                if (mRodzaje[i].equals("Elementy Szybkości")) {
+                    images[i] = R.drawable.szybkoscp;
+                }
+            }
+            Log.i("dziala", mRodzaje[0].toString());
         }
 
+        //Toast.makeText(getApplicationContext(),mRodzaje[0].toString(), Toast.LENGTH_LONG).show();
+
         listView = findViewById(R.id.listView);
-        DziennikAdapter adapter = new DziennikAdapter(this, mRodzaje,mDaty,mDystanse,mCzasy,images);
+        DziennikAdapter adapter = new DziennikAdapter(this, mRodzaje,mDaty,mDystanse,mCzasy, images);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -134,7 +172,7 @@ public class Dziennik extends AppCompatActivity {
             mRodzajTreningu.setText(rRodzaje[position]);
             mDataTreningu.setText(rDaty[position]);
             mDystansTreningu.setText(rDystanse[position]);
-            mCzasTreningu.setText(rCzasy[position]);
+            mCzasTreningu.setText("Czas: "+rCzasy[position]);
 
             return row;
 
