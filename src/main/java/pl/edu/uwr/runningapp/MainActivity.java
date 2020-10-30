@@ -1,11 +1,16 @@
 package pl.edu.uwr.runningapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
         buttonTreningBiegowy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                table_name = "Trening_biegowy";
-                rozpocznijTrening();
+                //table_name = "Trening_biegowy";
+                    rozpocznijTrening();
+                }
                 //finish();
 
-            }
-        });
+            });
 
         buttonTreningUzupelniajacy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     public void rozpocznijTrening() {
         Intent intent = new Intent(this,TreningRejestrowany.class);
         //startActivityForResult();
-        intent.putExtra("Tabela",table_name);
+        //intent.putExtra("Tabela",table_name);
         startActivity(intent);
 
     }

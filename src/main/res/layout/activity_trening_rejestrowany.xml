@@ -27,8 +27,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/czas_biegu_stoper_textView"
+    <Chronometer
+        android:id="@+id/czas_biegu_stoper_Chronometr"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -37,8 +37,8 @@
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:height="90dp"
+        android:format="00:00:00"
         android:gravity="center_horizontal"
-        android:text=""
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#000066"
@@ -65,7 +65,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/dystans_km_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/czas_biegu_stoper_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/czas_biegu_stoper_Chronometr" />
 
     <TextView
         android:id="@+id/dystans_km_textView"
