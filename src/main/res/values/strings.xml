@@ -6,7 +6,7 @@
     <string name="CzasBiegu">Czas Biegu</string>
     <string name="Dystans">Dystans:</string>
     <string name="SrednieTempo">Średnie Tempo:</string>
-    <string name="OstatniKm">Ostatni kilometr:</string>
+    <string name="OstatniKm">Ostatni km:</string>
     <string name="Start">START</string>
     <string name="Lap">LAP</string>
     <string name="Stop">STOP</string>
@@ -26,4 +26,5 @@
     <string name="Komentarz">"Komentarz: "</string>
     <string name="Dodaj_komentarz">Dodaj Komentarz</string>
     <string name="Usun_trening">Usuń Trening</string>
+    <string name="zakoncz_i_zapisz">Zakończ i Zapisz</string>
 </resources>

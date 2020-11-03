@@ -2,16 +2,19 @@ package pl.edu.uwr.runningapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -26,6 +29,7 @@ public class TreningSprawnosciowy extends AppCompatActivity {
     Integer id_treningu;
     Cursor wTreningi;
     Integer ostatni_id;
+    DatePickerDialog.OnDateSetListener setListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,42 @@ public class TreningSprawnosciowy extends AppCompatActivity {
             }
             id_treningu = ostatni_id + 1;
         }
+
+        Calendar calendar = Calendar.getInstance();
+        final int year = calendar.get(Calendar.YEAR);
+        final int month = calendar.get(Calendar.MONTH);
+        final int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        mDataSpr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(TreningSprawnosciowy.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        month = month+1;
+                        String date;
+                        if (month<10) {
+                            if (day<10) {
+                                date = "0"+day + "-0" + month + "-" + year;
+                            }
+                            else {
+                                date = day + "-0" + month + "-" + year;
+                            }
+                        }
+                        else {
+                            if(day<10) {
+                                date = "0"+day + "-" + month + "-" + year;
+                            }
+                            else {
+                                date = day + "-" + month + "-" + year;
+                            }
+                        }
+                        mDataSpr.setText(date);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
 
         mZapiszSpr.setOnClickListener(new View.OnClickListener() {
             @Override
