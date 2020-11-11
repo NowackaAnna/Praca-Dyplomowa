@@ -85,18 +85,18 @@ public class TreningSilaBiegowa extends AppCompatActivity {
                         String date;
                         if (month<10) {
                             if (day<10) {
-                                date = "0"+day + "-0" + month + "-" + year;
+                                date = year + "-0" + month + "-0" + day;
                             }
                             else {
-                                date = day + "-0" + month + "-" + year;
+                                date = year + "-0" + month + "-" + day;
                             }
                         }
                         else {
                             if(day<10) {
-                                date = "0"+day + "-" + month + "-" + year;
+                                date = year + "-" + month + "-0" + day;
                             }
                             else {
-                                date = day + "-" + month + "-" + year;
+                                date = year + "-" + month + "-" + day;
                             }
                         }
                         mDataSB.setText(date);

@@ -93,24 +93,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Czas_podglad_textView" />
 
-    <ScrollView
-        android:id="@+id/tresc_treningu_scroll"
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/Tresc_treningu_textView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:fillViewport="true"
-        android:scrollbars="vertical">
+        android:height="70dp"
+        android:textColor="#a9a9a9"
+        android:textSize="15sp"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Tresc_treningu_podglad_textView" />
 
-        <TextView
-            android:id="@+id/tresc_treningu_textView"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0" />
-    </ScrollView>
 
     <TextView
         android:id="@+id/Komentarz_podglad_textView"

@@ -123,7 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("Dystans", dystans);
         contentValues.put("Czas", czas_trwania);
         contentValues.put("Komentarz", komentarz);
-        contentValues.put("PoszczególneOdcinki", poszczegolne_odcinki);
+        contentValues.put("PoszczegolneOdcinki", poszczegolne_odcinki);
         contentValues.put("SrednieTempo", srednie_tempo);
         mDataBase.insert("treningiwszystkie", null, contentValues);
     }
@@ -182,11 +182,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mDataBase.query("treningiwszystkie",null,null,null,null,null,null);
     }
     public Cursor queryWszystkieTreningi2(){
-        String query="SELECT * FROM treningiwszystkie";
+        String query="SELECT * FROM treningiwszystkie ORDER BY DATE(Data) DESC";
         return mDataBase.rawQuery(query, null);
     }
     public Cursor queryWszystkieTreningiPosortowane(){
-        String query="SELECT * FROM treningiwszystkie ORDER BY Data DESC";
+        String query="SELECT * FROM treningiwszystkie ORDER BY date(Data) DESC";
         return mDataBase.rawQuery(query, null);
     }
     public Cursor queryPodgladTreningu(String nr_treningu){

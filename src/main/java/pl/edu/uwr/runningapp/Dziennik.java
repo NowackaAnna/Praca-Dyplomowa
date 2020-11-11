@@ -90,7 +90,8 @@ public class Dziennik extends AppCompatActivity {
             pozycja_w_tab = 0;
 
 
-            WszystkieTreningi = mDBHelper.queryWszystkieTreningii("treningiwszystkie", null, null, null, null, null, null);
+            //WszystkieTreningi = mDBHelper.queryWszystkieTreningii("treningiwszystkie", null, null, null, null, null, null);
+            WszystkieTreningi = mDBHelper.queryWszystkieTreningi2();
             if (WszystkieTreningi.moveToFirst()) {
                 do {
                     mIndeksy[pozycja_w_tab] = WszystkieTreningi.getInt(0);
@@ -115,6 +116,9 @@ public class Dziennik extends AppCompatActivity {
                 }
                 if (mRodzaje[i].equals("Elementy Szybkości")) {
                     images[i] = R.drawable.szybkoscp;
+                }
+                if (mRodzaje[i].equals("Bieganie")){
+                    images[i] = R.drawable.bieganiep;
                 }
             }
             Log.i("dziala", mRodzaje[0].toString());

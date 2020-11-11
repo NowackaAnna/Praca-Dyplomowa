@@ -231,7 +231,7 @@
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:height="40dp"
-        android:hint="@string/zakoncz_i_zapisz"
+        android:text="@string/zakoncz_i_zapisz"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#000066"

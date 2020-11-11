@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,10 +69,13 @@ public class PodgladTrening extends AppCompatActivity {
         mDataTreningu = (TextView)findViewById(R.id.Data_podglad_textView);
         mDystansTreningu = (TextView)findViewById(R.id.Dystans_podglad_textView);
         mCzasTreningu = (TextView)findViewById(R.id.Czas_podglad_textView);
-        mTrescTreningu = (TextView)findViewById(R.id.Tresc_treningu_podglad_textView);
+        mTrescTreningu = (TextView)findViewById(R.id.Tresc_treningu_textView);
         mKomentarz = (EditText) findViewById(R.id.Komentarz_podglad_editText);
         mDodajKomentarz = (Button) findViewById(R.id.Dodaj_komentarz_button);
         mUsun = (Button) findViewById(R.id.Usun_trening_button);
+
+        mTrescTreningu.setMovementMethod(new ScrollingMovementMethod());
+
 
         final DatabaseHelper mDBHelper = new DatabaseHelper(PodgladTrening.this);
         try{
@@ -106,7 +110,7 @@ public class PodgladTrening extends AppCompatActivity {
             mDataTreningu.setText(mDataTreninguS);
             mDystansTreningu.setText(mDystansTreninguS);
             mCzasTreningu.setText(mCzasTreninguS);
-            mCaloscTresci = mTrescTreninguS + "\n" + "Poszczególne odcinki: \n" + mPoszczegolneOdcinki + "\n" + "Średnie tempo: "+mSrednieTempo + "\n" + "Komentarz: \n"+mKomentarz + "\n";
+            mCaloscTresci ="Poszczególne odcinki: \n" + mPoszczegolneOdcinki + "\n" + "Średnie tempo: "+mSrednieTempo + "\n" + "Komentarz: \n"+mKomentarzS + "\n";
             mTrescTreningu.setText(mCaloscTresci);
 
 
@@ -124,7 +128,7 @@ public class PodgladTrening extends AppCompatActivity {
             mDataTreningu.setText(mDataTreninguS);
             mDystansTreningu.setText("");
             mCzasTreningu.setText(mCzasTreninguS);
-            mCaloscTresci = mTrescTreninguS + "\n" + "Komentarz: \n"+mKomentarz + "\n";
+            mCaloscTresci = mTrescTreninguS + "\n" + "Komentarz: \n"+mKomentarzS + "\n";
             mTrescTreningu.setText(mCaloscTresci);
 
 
@@ -145,7 +149,7 @@ public class PodgladTrening extends AppCompatActivity {
             mObciazenie = "Obciążenie: "+ mObciazenieTreninguS;
             mDystansTreningu.setText(mObciazenie);
             mCzasTreningu.setText(mCzasTreninguS);
-            mCaloscTresci = mTrescTreninguS + "\n"  + "Komentarz: \n"+mKomentarz + "\n";
+            mCaloscTresci = mTrescTreninguS + "\n"  + "Komentarz: \n"+mKomentarzS + "\n";
             mTrescTreningu.setText(mCaloscTresci);
 
 
@@ -165,7 +169,7 @@ public class PodgladTrening extends AppCompatActivity {
             mDataTreningu.setText(mDataTreninguS);
             mDystansTreningu.setText(mDystansTreninguS);
             mCzasTreningu.setText(mCzasTreninguS);
-            mCaloscTresci = mTrescTreninguS + "\n" + "Komentarz: \n"+mKomentarz + "\n";
+            mCaloscTresci = mTrescTreninguS + "\n" + "Komentarz: \n"+mKomentarzS + "\n";
             mTrescTreningu.setText(mCaloscTresci);
 
 
@@ -185,7 +189,7 @@ public class PodgladTrening extends AppCompatActivity {
             mDataTreningu.setText(mDataTreninguS);
             mDystansTreningu.setText(mDystansTreninguS);
             mCzasTreningu.setText(mCzasTreninguS);
-            mCaloscTresci = mTrescTreninguS + "\n" + "Komentarz: \n"+mKomentarz + "\n";
+            mCaloscTresci = mTrescTreninguS + "\n" + "Komentarz: \n"+mKomentarzS + "\n";
             mTrescTreningu.setText(mCaloscTresci);
 
 
