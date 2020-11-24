@@ -75,6 +75,7 @@ public class PodgladTrening extends AppCompatActivity {
         mUsun = (Button) findViewById(R.id.Usun_trening_button);
 
         mTrescTreningu.setMovementMethod(new ScrollingMovementMethod());
+        mKomentarz.setMovementMethod(new ScrollingMovementMethod());
 
 
         final DatabaseHelper mDBHelper = new DatabaseHelper(PodgladTrening.this);

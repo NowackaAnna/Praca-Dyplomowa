@@ -4,13 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+//import static androidx.legacy.content.WakefulBroadcastReceiver.startWakefulService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //table_name = "Trening_biegowy";
                     rozpocznijTrening();
+                    finish();
                 }
                 //finish();
 
@@ -43,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dodajTrening();
-                //finish();
+                finish();
 
             }
         });
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 otworzDziennik();
-                //finish();
+                finish();
 
             }
         });
@@ -62,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,TreningRejestrowany.class);
         //startActivityForResult();
         //intent.putExtra("Tabela",table_name);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            String PackageName = getPackageName();
+            PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+            if(!pm.isIgnoringBatteryOptimizations(PackageName)){
+                intent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setData(Uri.parse("package: " + PackageName));
+            }
+        }
         startActivity(intent);
 
     }

@@ -4,86 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     tools:context=".TreningRejestrowany">
 
-    <TextView
-        android:id="@+id/czas_biegu_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="40dp"
-        android:gravity="center_horizontal"
-        android:text="@string/CzasBiegu"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="#000066"
-        android:textSize="25sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="0dp"
+        android:src="@drawable/header"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
 
     <Chronometer
         android:id="@+id/czas_biegu_stoper_Chronometr"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:height="90dp"
         android:format="00:00:00"
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#000066"
-        android:textSize="40sp"
+        android:textSize="70sp"
         android:textStyle="bold"
+        android:keepScreenOn="true"
+        android:paddingTop="25dp"
+        android:background="@drawable/bg"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/czas_biegu_textView" />
-
-    <TextView
-        android:id="@+id/dystans_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:height="30dp"
-        android:text="@string/Dystans"
-        android:textAllCaps="true"
-        android:textColor="#000066"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/dystans_km_textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/czas_biegu_stoper_Chronometr" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/dystans_km_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
+        android:layout_width="158dp"
+        android:layout_height="73dp"
+        android:height="25dp"
+        android:background="@drawable/bg"
+        android:gravity="center"
+        android:paddingTop="5dp"
         android:text=""
+        android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000066"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/dystans_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dystans_textView" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="200dp" />
 
     <TextView
         android:id="@+id/średnie_tempo_textView"
@@ -91,21 +67,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:height="30dp"
+        android:gravity="center_horizontal"
         android:text="@string/SrednieTempo"
+        android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#000066"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/średnie_tempo_wartość_textView"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toStartOf="@+id/Ostatni_km_textView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dystans_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 
     <TextView
-        android:id="@+id/średnie_tempo_wartość_textView"
+        android:id="@+id/Ostatni_km_textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -113,31 +91,35 @@
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:height="30dp"
-        android:text=""
+        android:text="@string/OstatniKm"
         android:textAllCaps="true"
         android:textColor="#000066"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:textSize="21sp"
+        android:textStyle="normal"
+        android:textAlignment="center"
         app:layout_constraintBaseline_toBaselineOf="@+id/średnie_tempo_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/średnie_tempo_textView" />
+        app:layout_constraintStart_toEndOf="@+id/średnie_tempo_textView"
+        android:gravity="center_horizontal" />
 
     <TextView
-        android:id="@+id/Ostatni_km_textView"
+        android:id="@+id/srednie_tempo_wynik_textView2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="25dp"
         android:height="30dp"
-        android:text="@string/OstatniKm"
-        android:textAllCaps="true"
+        android:text=""
+        android:textAllCaps="false"
         android:textColor="#000066"
-        android:textSize="21sp"
-        android:textStyle="normal"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/Ostatni_km_wynik_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/średnie_tempo_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/średnie_tempo_textView"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:id="@+id/Ostatni_km_wynik_textView"
@@ -145,7 +127,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
         android:height="30dp"
@@ -154,9 +135,11 @@
         android:textColor="#000066"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintBaseline_toBaselineOf="@+id/srednie_tempo_wynik_textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Ostatni_km_textView"
-        app:layout_constraintTop_toBottomOf="@+id/średnie_tempo_wartość_textView" />
+        app:layout_constraintStart_toEndOf="@+id/srednie_tempo_wynik_textView2"
+        android:gravity="center_horizontal" />
 
     <Button
         android:id="@+id/start_button"
@@ -168,16 +151,17 @@
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:height="40dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:text="@string/Start"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="#000066"
+        android:textColor="@color/my_app_color_on_secondary"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:background="@drawable/button_design_blue"
         app:layout_constraintEnd_toStartOf="@+id/lap_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Ostatni_km_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/srednie_tempo_wynik_textView2" />
 
     <Button
         android:id="@+id/lap_button"
@@ -189,16 +173,17 @@
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:height="40dp"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:text="@string/Lap"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="#000066"
+        android:textColor="@color/my_app_color_on_secondary"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:background="@drawable/button_design_blue"
         app:layout_constraintEnd_toStartOf="@+id/stop_button"
         app:layout_constraintStart_toEndOf="@+id/start_button"
-        app:layout_constraintTop_toBottomOf="@+id/Ostatni_km_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/srednie_tempo_wynik_textView2" />
 
     <Button
         android:id="@+id/stop_button"
@@ -213,13 +198,14 @@
         android:text="@string/Stop"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="#000066"
+        android:textColor="@color/my_app_color_on_secondary"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:background="@drawable/button_design_blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lap_button"
         app:layout_constraintTop_toBottomOf="@+id/Ostatni_km_wynik_textView"
-        android:gravity="center_horizontal" />
+        android:gravity="center" />
 
     <Button
         android:id="@+id/zakoncz_i_zapisz_button"
@@ -234,14 +220,15 @@
         android:text="@string/zakoncz_i_zapisz"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="#000066"
+        android:textColor="@color/my_app_color_on_secondary"
         android:textSize="25sp"
         android:textStyle="bold"
         android:enabled="false"
+        android:background="@drawable/button_design_blue_recentagle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lap_button"
-        android:gravity="center_horizontal" />
+        android:gravity="center" />
     <TextView
         android:id="@+id/ostatni_lap_textView"
         android:layout_width="0dp"
@@ -262,4 +249,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/zakoncz_i_zapisz_button"
         android:gravity="center_horizontal" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

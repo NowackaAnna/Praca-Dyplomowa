@@ -135,6 +135,7 @@
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/Zapisz_button3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

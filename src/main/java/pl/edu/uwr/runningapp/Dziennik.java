@@ -135,7 +135,23 @@ public class Dziennik extends AppCompatActivity {
 
                 indeksPodglad = mIndeksy[i].toString();
                 rodzajPodglad = mRodzaje[i];
-                pokazTrening();
+
+                if(rodzajPodglad.equals("Sprawnościowy")){
+                    Log.i("dziala",rodzajPodglad);
+                    pokazTreningSprawnosciowy();
+                }
+                if(rodzajPodglad.equals("Siłowy")){
+                    pokazTreningSilowy();
+                }
+                if(rodzajPodglad.equals("Siła Biegowa")){
+                    pokazTreningSE();
+                }
+                if(rodzajPodglad.equals("Elementy Szybkości")){
+                    pokazTreningSE();
+                }
+                if(rodzajPodglad.equals("Bieganie")){
+                    pokazTreningBiegowy();
+                }
                 mDBHelper.close();
                 finish();
 
@@ -184,9 +200,39 @@ public class Dziennik extends AppCompatActivity {
 
     }
     public void pokazTrening() {
-        Intent intent = new Intent(this,PodgladTrening.class);
+        Intent intent = new Intent(this,PodgladSprawnosciowy.class);
         intent.putExtra("Nr treningu",indeksPodglad);
         intent.putExtra("RodzajTr",rodzajPodglad);
         startActivity(intent);
+    }
+    public void pokazTreningBiegowy() {
+        Intent intent = new Intent(this,PodgladBiegowy.class);
+        intent.putExtra("Nr treningu",indeksPodglad);
+        intent.putExtra("RodzajTr",rodzajPodglad);
+        startActivity(intent);
+    }
+    public void pokazTreningSprawnosciowy() {
+        Intent intent = new Intent(this, PodgladSprawnosciowy.class);
+        intent.putExtra("Nr treningu",indeksPodglad);
+        intent.putExtra("RodzajTr",rodzajPodglad);
+        startActivity(intent);
+    }
+    public void pokazTreningSilowy() {
+        Intent intent = new Intent(Dziennik.this, PodgladSilowy.class);
+        intent.putExtra("Nr treningu",indeksPodglad);
+        intent.putExtra("RodzajTr",rodzajPodglad);
+        startActivity(intent);
+    }
+    public void pokazTreningSE() {
+        Intent intent = new Intent(this,PodgladSbEs.class);
+        intent.putExtra("Nr treningu",indeksPodglad);
+        intent.putExtra("RodzajTr",rodzajPodglad);
+        startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

@@ -1,7 +1,7 @@
 package pl.edu.uwr.runningapp;
 import android.Manifest;
-import android.app.Activity;
-import android.app.Service;
+import android.app.KeyguardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,8 +10,8 @@ import android.database.SQLException;
 import android.location.Location;
 import android.os.Build;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Looper;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
 
@@ -20,36 +20,47 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static java.lang.Boolean.FALSE;
+
+
+
+//import static androidx.legacy.content.WakefulBroadcastReceiver.startWakefulService;
 import static java.lang.Boolean.TRUE;
 
-public class TreningRejestrowany extends AppCompatActivity{
+public class TreningRejestrowany extends AppCompatActivity {
+    public static final String WAKE_LOCK = "android.permission.WAKE_LOCK";
     private static final int PERMISSIONS_FINE_LOCATION = 99;
+
     LocationRequest locationRequest;
     LocationCallback locationCallBack;
     FusedLocationProviderClient fusedLocationProviderClient;
+
+    LocationRequest locationRequest2;
+    LocationCallback locationCallBack2;
+    FusedLocationProviderClient fusedLocationProviderClient2;
 
     TextView mDystans;
     TextView mLastLap;
@@ -63,10 +74,13 @@ public class TreningRejestrowany extends AppCompatActivity{
     private boolean isResume;
     private boolean jestReset;
     Handler handler;
+    Handler gpsHandler;
     Double szerA = 0.0;
     Double dlugA = 0.0;
     Double szerB = 0.0;
     Double dlugB = 0.0;
+    Double szerTest = 0.0;
+    Double dlugTest = 0.0;
     Double checkSzer;
     Double roznicaSzer;
     Double roznicaDlug;
@@ -109,17 +123,42 @@ public class TreningRejestrowany extends AppCompatActivity{
     int secSrednia = 0;
     int minSreadnia = 0;
     int miliSecSrednia = 0;
+    Boolean keyPower;
+
+    boolean isPhoneLocked;
+    boolean isScreenAwake;
 
     Integer ilosc_treningow;
     Integer id_treningu;
     Cursor wTreningi;
     Integer ostatni_id;
     String mRodzajB;
+    String trasaSzer = "";
+    String trasaDlug = "";
+
+    PowerManager.WakeLock wL;
+    String wLname = "TreningRejestrowany";
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        PowerManager pM = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        wL = pM.newWakeLock(PowerManager.FULL_WAKE_LOCK, "RunningApp::WakeLockTag");
+        wL.acquire();
+
+       // MediaPlayer player = MediaPlayer.create(this, Settings.System.DEFAULT_ALARM_ALERT_URI);
+        //player.setLooping(true);
+        //player.getCurrentPosition();
+        //player.getRoutedDevice();
+        //player.
+        //player.start();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trening_rejestrowany);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         mDystans = (TextView)findViewById(R.id.dystans_km_textView);
         mStart = (Button)findViewById(R.id.start_button);
         mStop = (Button)findViewById(R.id.stop_button);
@@ -127,9 +166,19 @@ public class TreningRejestrowany extends AppCompatActivity{
         mZapisz = (Button)findViewById(R.id.zakoncz_i_zapisz_button);
         mStoper = (Chronometer)findViewById(R.id.czas_biegu_stoper_Chronometr);
         mLastLap = (TextView)findViewById(R.id.ostatni_lap_textView);
-        mSrednie = (TextView)findViewById(R.id.średnie_tempo_wartość_textView);
+        mSrednie = (TextView)findViewById(R.id.srednie_tempo_wynik_textView2);
         mAutoLap = (TextView)findViewById(R.id.Ostatni_km_wynik_textView);
         handler = new Handler();
+        gpsHandler = new Handler();
+
+        keyPower = false;
+        isPhoneLocked = false;
+        isScreenAwake = true;
+
+        //Intent intent = new Intent(this,TreningRejestrowany.class);
+        //startWakefulService(this, intent);
+        //onTaskRemoved(intent);
+
 
         final DatabaseHelper mDBHelper = new DatabaseHelper(TreningRejestrowany.this);
         try{
@@ -178,10 +227,11 @@ public class TreningRejestrowany extends AppCompatActivity{
         jestReset = false;
         mLap.setText("LAP");
         mLap.setEnabled(false);
+        mStop.setEnabled(false);
 
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(4000);
-        locationRequest.setFastestInterval(2000);
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
 
@@ -211,10 +261,14 @@ public class TreningRejestrowany extends AppCompatActivity{
                     tStart= SystemClock.uptimeMillis();
                     handler.postDelayed(runnable,0);
                     mStoper.start();
+                    gpsHandler.postDelayed(GPSrunnable,3000);
                     isResume = true;
                 }
-
                 startLocationUpdates();
+
+
+
+
 
             }});
 
@@ -224,6 +278,7 @@ public class TreningRejestrowany extends AppCompatActivity{
                 if(isResume) {
                     tBuff += tMiliSec;
                     handler.removeCallbacks(runnable);
+                    gpsHandler.removeCallbacks(GPSrunnable);
                     mStoper.stop();
                     isResume = false;
                 }
@@ -342,7 +397,8 @@ public class TreningRejestrowany extends AppCompatActivity{
 
                 if(poprawnosc == TRUE) {
                     Float dystansBb = Float.parseFloat(dystansB);
-                    mDBHelper.dodajTreningBiegowyW(id_treningu, dataTreningu,rodzajB,dystansBb,czasB,komentarzB,poszczegolneOdcinki,srednieTempo);
+                    //mDBHelper.dodajTreningBiegowyW(id_treningu, dataTreningu,rodzajB,dystansBb,czasB,komentarzB,poszczegolneOdcinki,srednieTempo);
+                    mDBHelper.dodajTreningBiegowyWM(id_treningu, dataTreningu,rodzajB,dystansBb,czasB,komentarzB,poszczegolneOdcinki,srednieTempo,trasaSzer,trasaDlug);
                     Toast.makeText(getApplicationContext(),"Wykonany trening został zapisany", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(TreningRejestrowany.this,MainActivity.class);
                     startActivity(intent);
@@ -438,7 +494,14 @@ public class TreningRejestrowany extends AppCompatActivity{
                     Log.i("dziala","Szerokosc A: " + szerA);
                     Log.i("dziala","Szerokosc B: "+ szerB);
 
+                    trasaSzer = trasaSzer + szerB.toString() + ",";
+                    trasaDlug = trasaDlug + dlugB.toString() + ",";
+
                     updateUIValue(dystansCalkowity);
+
+                    dystansAutoLap = dystansCalkowityTemp - ostatniAutoLapD;
+                    szerTest = szerB;
+                    dlugTest = dlugB;
 
                     if(dystansCalkowity >= 0.01){
                         //tSrednia = tUpdate/(Double.valueOf(dystansCalkowity).longValue());
@@ -446,7 +509,7 @@ public class TreningRejestrowany extends AppCompatActivity{
                         secSrednia = (int) (tSrednia);
                         minSreadnia = secSrednia/60;
                         secSrednia = secSrednia%60;
-                        mSrednie.setText(String.format("%02d",minSreadnia)+":"+String.format("%02d",secSrednia));}
+                        mSrednie.setText(String.format("%02d",minSreadnia)+":"+String.format("%02d",secSrednia)+"/km");}
                     else{
                         mSrednie.setText("--:--");
                     }
@@ -462,14 +525,11 @@ public class TreningRejestrowany extends AppCompatActivity{
 
                         aktualnyAutoLapT = String.format("%02d",minLapAuto)+":"+String.format("%02d",secLapAuto) + ":"+String.format("%02d",miliSecLapAuto);
                         mAutoLap.setText(aktualnyAutoLapT);
-                        caloscAutoLap = caloscAutoLap + aktualnyAutoLapT + " - " + dystansAutoLap + "\n";
+                        caloscAutoLap = caloscAutoLap + aktualnyAutoLapT + " - " + dystansAutoLap + "- " + szerTest.toString() + ", " + dlugTest.toString() + "\n";
 
                         ostatniAutoLapD = dystansCalkowityTemp;
                         dystansAutoLap = dystansCalkowityTemp - ostatniAutoLapD;
 
-                    }
-                    else {
-                        dystansAutoLap = dystansCalkowityTemp - ostatniAutoLapD;
                     }
 
 
@@ -492,6 +552,8 @@ public class TreningRejestrowany extends AppCompatActivity{
                 public void onSuccess(Location location) {
                     szerB = location.getLatitude();
                     dlugB = location.getLongitude();
+                    trasaSzer = trasaSzer + szerB.toString() + ",";
+                    trasaDlug = trasaDlug + dlugB.toString() + ",";
                 }
             });
         }
@@ -520,7 +582,187 @@ public class TreningRejestrowany extends AppCompatActivity{
             miliSec =(int) (tUpdate%100);
             mStoper.setText(String.format("%02d",min)+":"+String.format("%02d",sec) + ":"+String.format("%02d",miliSec));
             handler.postDelayed(this,60);
+
+
         }
     };
+
+    public Runnable GPSrunnable = new Runnable() {
+        @Override
+        public void run() {
+            KeyguardManager myKM = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+            isPhoneLocked = myKM.inKeyguardRestrictedInputMode();
+            PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            isScreenAwake = (Build.VERSION.SDK_INT < 20? powerManager.isScreenOn():powerManager.isInteractive());
+            if (isPhoneLocked == true || isScreenAwake == false) {
+
+
+                fusedLocationProviderClient2 = LocationServices.getFusedLocationProviderClient(TreningRejestrowany.this);
+                if (ActivityCompat.checkSelfPermission(TreningRejestrowany.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    fusedLocationProviderClient2.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Location> task) {
+                            Location location2 = task.getResult();
+
+                            szerA = szerB;
+                            dlugA = dlugB;
+                            szerB = location2.getLatitude();
+                            dlugB = location2.getLongitude();
+                            Location locationA = new Location("punkt A");
+                            Location locationB = new Location("punkt B");
+                            locationA.setLatitude(szerA);
+                            locationA.setLongitude(dlugA);
+                            locationB.setLatitude(szerB);
+                            locationB.setLongitude(dlugB);
+
+
+                            dystansAB = (locationA.distanceTo(locationB)) / 1000;
+                            //Log.i("dziala","Dystans1: " + dystansAB);
+
+                            //dystansCalkowity = dystansCalkowity + Math.round(dystansAB * 100.0) / 100.0;
+                            dystansCalkowityTemp = dystansCalkowityTemp + dystansAB;
+                            //dystansCalkowity = dystansCalkowity + dystansAB;
+
+                            dystansCalkowity = Math.round(dystansCalkowityTemp * 100.0) / 100.0;
+
+                            Log.i("dziala", "Dystans1: " + dystansCalkowityTemp);
+                            Log.i("dziala", "Dystans2: " + dystansCalkowity);
+
+                            //if(location.hasSpeed()){
+                            //  speed = location.getSpeed();
+                            // }
+
+
+                            wysokosc = location2.getAltitude();
+                            wysokosc = Math.round(wysokosc * 100.0) / 100.0;
+                            Log.i("dziala", "Szerokosc A: " + szerA);
+                            Log.i("dziala", "Szerokosc B: " + szerB);
+
+                            updateUIValue(dystansCalkowity);
+
+                            if (dystansCalkowity >= 0.01) {
+                                //tSrednia = tUpdate/(Double.valueOf(dystansCalkowity).longValue());
+                                tSrednia = ((min * 60) + sec) / dystansCalkowity;
+                                secSrednia = (int) (tSrednia);
+                                minSreadnia = secSrednia / 60;
+                                secSrednia = secSrednia % 60;
+                                mSrednie.setText(String.format("%02d", minSreadnia) + ":" + String.format("%02d", secSrednia));
+                            } else {
+                                mSrednie.setText("--:--");
+                            }
+
+                            if (dystansAutoLap >= 1.0) {
+                                tDifferenceAuto = tUpdate - lastAutoLap;
+                                lastAutoLap = tUpdate;
+
+                                secLapAuto = (int) (tDifferenceAuto / 1000);
+                                minLapAuto = secLapAuto / 60;
+                                secLapAuto = secLapAuto % 60;
+                                miliSecLapAuto = (int) (tDifferenceAuto % 100);
+
+                                aktualnyAutoLapT = String.format("%02d", minLapAuto) + ":" + String.format("%02d", secLapAuto) + ":" + String.format("%02d", miliSecLapAuto);
+                                mAutoLap.setText(aktualnyAutoLapT);
+                                caloscAutoLap = caloscAutoLap + aktualnyAutoLapT + " - " + dystansAutoLap + "\n";
+
+                                ostatniAutoLapD = dystansCalkowityTemp;
+                                dystansAutoLap = dystansCalkowityTemp - ostatniAutoLapD;
+
+                            } else {
+                                dystansAutoLap = dystansCalkowityTemp - ostatniAutoLapD;
+                            }
+
+
+                        }
+                    });
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_FINE_LOCATION);
+                    }
+                }
+            }
+            else{
+
+            }
+
+        gpsHandler.postDelayed(this,4000);
+
+    }
+    };
+
+
+    protected void onPause() {
+        if(isResume) {
+            startLocationUpdates();
+        }
+        super.onPause();
+
+    }
+
+    @Override
+    public void onStop() {
+
+        super.onStop();
+        startLocationUpdates();
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        if(isResume) {
+            startLocationUpdates();
+        }
+        super.onResume();
+    }
+
+    protected void onDestroy() {
+
+        //if(wL.isHeld()) {
+        //    wL.release();
+       // }
+        wL.release();
+        stopLocationUpdates();
+        super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_POWER) {
+            if(keyPower == false){
+                mStart.setClickable(false);
+                mStop.setClickable(false);
+                mLap.setClickable(false);
+                mZapisz.setClickable(false);
+                keyPower = true;
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            }
+
+            if(keyPower == true) {
+                mStart.setClickable(true);
+                mStop.setClickable(true);
+                mLap.setClickable(true);
+                mZapisz.setClickable(true);
+                keyPower = false;
+            }
+            //event.startTracking(); // Needed to track long presses
+
+            return true;
+        }
+        updateGPS();
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        stopLocationUpdates();
+
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 }

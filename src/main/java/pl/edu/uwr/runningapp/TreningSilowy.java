@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -42,6 +43,8 @@ public class TreningSilowy extends AppCompatActivity {
         mObciazenieSily = (EditText)findViewById(R.id.Obciazenie_laczne_editText2);
         mTrescTreninguSily = (EditText)findViewById(R.id.Tresc_treningu_editText2);
         mZapiszSily = (Button) findViewById(R.id.Zapisz_button2);
+
+        mTrescTreninguSily.setMovementMethod(new ScrollingMovementMethod());
 
 
         final DatabaseHelper mDBHelper = new DatabaseHelper(TreningSilowy.this);
@@ -150,5 +153,11 @@ public class TreningSilowy extends AppCompatActivity {
                 }
 
             }});
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,TreningUzupelniajacy.class);
+        startActivity(intent);
+        finish();
     }
 }

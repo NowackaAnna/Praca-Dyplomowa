@@ -28,7 +28,7 @@ public class TreningUzupelniajacy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dodajTreningSprawnosciowy();
-                //finish();
+                finish();
 
             }
         });
@@ -36,7 +36,7 @@ public class TreningUzupelniajacy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dodajTreningSilowy();
-                //finish();
+                finish();
 
             }
         });
@@ -44,7 +44,7 @@ public class TreningUzupelniajacy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dodajTreningSilaBiegowa();
-                //finish();
+                finish();
 
             }
         });
@@ -52,7 +52,7 @@ public class TreningUzupelniajacy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dodajTreningElementySzybkosci();
-                //finish();
+                finish();
 
             }
         });
@@ -73,5 +73,11 @@ public class TreningUzupelniajacy extends AppCompatActivity {
     public void dodajTreningElementySzybkosci() {
         Intent intent = new Intent(this,TreningElementySzybkosci.class);
         startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

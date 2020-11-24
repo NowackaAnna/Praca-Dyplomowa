@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="vertical"
-    tools:context=".PodgladTrening">
+    tools:context=".PodgladSbEs">
 
     <TextView
-        android:id="@+id/Rodzaj_podglad_textView"
+        android:id="@+id/Rodzaj_podglad_textViewSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/Data_podglad_textView"
+        android:id="@+id/Data_podglad_textViewSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -41,10 +41,10 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rodzaj_podglad_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Rodzaj_podglad_textViewSE" />
 
     <TextView
-        android:id="@+id/Dystans_podglad_textView"
+        android:id="@+id/Dystans_podglad_textViewSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -58,10 +58,10 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Data_podglad_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Data_podglad_textViewSE" />
 
     <TextView
-        android:id="@+id/Czas_podglad_textView"
+        android:id="@+id/Czas_podglad_textViewSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -75,10 +75,10 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Dystans_podglad_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Dystans_podglad_textViewSE" />
 
     <TextView
-        android:id="@+id/Tresc_treningu_podglad_textView"
+        android:id="@+id/Tresc_treningu_podglad_textViewSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -92,10 +92,10 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Czas_podglad_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Czas_podglad_textViewSE" />
 
     <TextView
-        android:id="@+id/Tresc_treningu_textView"
+        android:id="@+id/Tresc_treningu_textViewSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -109,11 +109,11 @@
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Tresc_treningu_podglad_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Tresc_treningu_podglad_textViewSE" />
 
 
     <TextView
-        android:id="@+id/Komentarz_podglad_textView"
+        android:id="@+id/Komentarz_podglad_textViewSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -127,9 +127,10 @@
         android:textSize="25sp" />
 
     <EditText
-        android:id="@+id/Komentarz_podglad_editText"
+        android:id="@+id/Komentarz_podglad_editTextSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:height="100dp"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
@@ -143,7 +144,7 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/Dodaj_komentarz_button"
+        android:id="@+id/Dodaj_komentarz_buttonSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
@@ -157,7 +158,7 @@
         android:textSize="25sp" />
 
     <Button
-        android:id="@+id/Usun_trening_button"
+        android:id="@+id/Usun_trening_buttonSE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"

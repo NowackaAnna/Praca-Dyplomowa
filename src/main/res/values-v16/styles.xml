@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/my_app_color_on_surface</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:fontFamily">monospace</item>
+    </style>
+</resources>
