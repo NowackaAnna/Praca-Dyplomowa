@@ -96,7 +96,12 @@ public class PodgladSprawnosciowy extends AppCompatActivity {
         mCalkowityCzas = "Czas: " + mCzasTreninguSSpr;
         mCzasTreninguSpr.setText(mCalkowityCzas);
 
-        mCaloscTresciSpr = mTrescTreninguSSpr+ "\n" + "Komentarz: \n"+mKomentarzSSpr + "\n";
+        if(mKomentarzSSpr.equals("")){
+            mCaloscTresciSpr = mTrescTreninguSSpr;
+        }
+        else {
+            mCaloscTresciSpr = mTrescTreninguSSpr+ "\n" + "Komentarz: \n"+mKomentarzSSpr + "\n";
+        }
 
         mTrescTreninguSpr.setText(mCaloscTresciSpr);
 

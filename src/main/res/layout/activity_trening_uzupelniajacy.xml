@@ -17,6 +17,7 @@
         android:layout_marginRight="5dp"
         android:height="50dp"
         android:text="@string/szybkosc"
+        android:background="@drawable/button_design"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trening_sila_biegowa_button" />
@@ -32,6 +33,7 @@
         android:layout_marginRight="5dp"
         android:height="50dp"
         android:text="@string/sprawnosc"
+        android:background="@drawable/button_design"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +49,7 @@
         android:layout_marginRight="5dp"
         android:height="50dp"
         android:text="@string/sila"
+        android:background="@drawable/button_design"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trening_sprawnosciowy_button" />
@@ -62,6 +65,7 @@
         android:layout_marginRight="5dp"
         android:height="50dp"
         android:text="@string/sila_biegowa"
+        android:background="@drawable/button_design"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trening_silowy_button" />

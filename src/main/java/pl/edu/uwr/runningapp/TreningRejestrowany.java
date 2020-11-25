@@ -84,7 +84,10 @@ public class TreningRejestrowany extends AppCompatActivity {
     Double checkSzer;
     Double roznicaSzer;
     Double roznicaDlug;
-    Double wysokosc = 0.0;
+    Double wysokoscStart = 0.0;
+    Double wysokoscEnd = 0.0;
+    Double wysokoscUp = 0.0;
+    Double wysokoscDown = 0.0;
     String ostatniLapT;
     String caloscLap = "";
     String caloscAutoLap = "";
@@ -114,15 +117,19 @@ public class TreningRejestrowany extends AppCompatActivity {
     int sec = 0;
     int min = 0;
     int miliSec = 0;
+    int hours = 0;
     int secLap = 0;
     int minLap = 0;
     int miliSecLap = 0;
+    int hoursLap = 0;
     int secLapAuto = 0;
     int minLapAuto = 0;
     int miliSecLapAuto = 0;
+    int hoursLapAuto = 0;
     int secSrednia = 0;
     int minSreadnia = 0;
     int miliSecSrednia = 0;
+    int hoursSrednia = 0;
     Boolean keyPower;
 
     boolean isPhoneLocked;
@@ -261,7 +268,7 @@ public class TreningRejestrowany extends AppCompatActivity {
                     tStart= SystemClock.uptimeMillis();
                     handler.postDelayed(runnable,0);
                     mStoper.start();
-                    gpsHandler.postDelayed(GPSrunnable,3000);
+                    //gpsHandler.postDelayed(GPSrunnable,3000);
                     isResume = true;
                 }
                 startLocationUpdates();
@@ -278,7 +285,7 @@ public class TreningRejestrowany extends AppCompatActivity {
                 if(isResume) {
                     tBuff += tMiliSec;
                     handler.removeCallbacks(runnable);
-                    gpsHandler.removeCallbacks(GPSrunnable);
+                    //gpsHandler.removeCallbacks(GPSrunnable);
                     mStoper.stop();
                     isResume = false;
                 }
@@ -310,6 +317,7 @@ public class TreningRejestrowany extends AppCompatActivity {
                             sec = 0;
                             min = 0;
                             miliSec = 0;
+                            hours = 0;
 
                             ostatniLapD = 0.0;
                             ostatniAutoLapD = 0.0;
@@ -328,20 +336,33 @@ public class TreningRejestrowany extends AppCompatActivity {
                             secLap = 0;
                             minLap = 0;
                             miliSecLap = 0;
+                            hoursLap = 0;
 
                             secLapAuto = 0;
                             minLapAuto = 0;
                             miliSecLapAuto = 0;
+                            hoursLapAuto = 0;
 
                             tSrednia = 0.0;
                             secSrednia = 0;
                             minSreadnia = 0;
                             miliSecSrednia = 0;
+                            hoursSrednia = 0;
 
                             mLastLap.setText("");
                             mStoper.setText("00:00:00");
                             mSrednie.setText("--:--");
                             mAutoLap.setText("--:--");
+
+                            szerTest = 0.0;
+                            dlugTest = 0.0;
+                            trasaDlug = "";
+                            trasaSzer = "";
+
+                            wysokoscStart = 0.0;
+                            wysokoscDown = 0.0;
+                            wysokoscEnd = 0.0;
+                            wysokoscUp = 0.0;
 
                             mZapisz.setEnabled(false);
 
@@ -363,14 +384,21 @@ public class TreningRejestrowany extends AppCompatActivity {
                     lastLap = tUpdate;
 
                     secLap = (int) (tDifference/1000);
-                    minLap = secLap/60;
-                    secLap = secLap%60;
-                    miliSecLap =(int) (tDifference%100);
-
-
-                    caloscLapT = String.format("%02d",min)+":"+String.format("%02d",sec) + ":"+String.format("%02d",miliSec);
-
-                    aktualnyLapT = String.format("%02d",minLap)+":"+String.format("%02d",secLap) + ":"+String.format("%02d",miliSecLap);
+                    if(secLap<=3599) {
+                        minLap = secLap / 60;
+                        secLap = secLap % 60;
+                        miliSecLap = (int) (tDifference % 100);
+                        aktualnyLapT = String.format("%02d",minLap)+":"+String.format("%02d",secLap) + ":"+String.format("%02d",miliSecLap);
+                        caloscLapT = String.format("%02d",min)+":"+String.format("%02d",sec) + ":"+String.format("%02d",miliSec);
+                    }
+                    else {
+                        hoursLap = secLap / 3600;
+                        minLap = (secLap % 3600) / 60;
+                        secLap = (secLap % 3600) % 60;
+                        miliSecLap = (int) (tDifference % 100);
+                        aktualnyLapT = String.format("%02d",hoursLap) + ":" + String.format("%02d",minLap)+":"+String.format("%02d",secLap) + ":"+String.format("%02d",miliSecLap);
+                        caloscLapT = String.format("%02d",hours)+":"+String.format("%02d",min)+":"+String.format("%02d",sec) + ":"+String.format("%02d",miliSec);
+                    }
 
                     mLastLap.setText(aktualnyLapT + " - " + aktualnyLapD + " - " + caloscLapT);
 
@@ -391,14 +419,20 @@ public class TreningRejestrowany extends AppCompatActivity {
                 String dystansB = String.valueOf(dystansCalkowity);
                 String poszczegolneOdcinki = "Lapy: \n"+ caloscLap + "AutoLapy: \n"+ caloscAutoLap;
                 String srednieTempo = String.format("%02d",minSreadnia)+":"+String.format("%02d",secSrednia);
-                String komentarzB = "Wysokość n.p.m.: "+ String.valueOf(wysokosc);
+                wysokoscStart = Math.round(wysokoscStart * 100.0) / 100.0;
+                wysokoscUp = Math.round(wysokoscUp * 100.0) / 100.0;
+                wysokoscDown = Math.round(wysokoscDown * 100.0) / 100.0;
+                wysokoscEnd = Math.round(wysokoscEnd * 100.0) / 100.0;
+                String wysokoscUpS = String.valueOf(wysokoscUp);
+                String wysokoscDownS = String.valueOf(wysokoscDown);
+                String komentarzB = "Wysokość końcowa n.p.m.: "+ String.valueOf(wysokoscEnd);
                 String rodzajB = "Bieganie";
                 Boolean poprawnosc = TRUE;
 
                 if(poprawnosc == TRUE) {
                     Float dystansBb = Float.parseFloat(dystansB);
                     //mDBHelper.dodajTreningBiegowyW(id_treningu, dataTreningu,rodzajB,dystansBb,czasB,komentarzB,poszczegolneOdcinki,srednieTempo);
-                    mDBHelper.dodajTreningBiegowyWM(id_treningu, dataTreningu,rodzajB,dystansBb,czasB,komentarzB,poszczegolneOdcinki,srednieTempo,trasaSzer,trasaDlug);
+                    mDBHelper.dodajTreningBiegowyWM(id_treningu, dataTreningu,rodzajB,dystansBb,czasB,komentarzB,poszczegolneOdcinki,srednieTempo,trasaSzer,trasaDlug,wysokoscUpS,wysokoscDownS);
                     Toast.makeText(getApplicationContext(),"Wykonany trening został zapisany", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(TreningRejestrowany.this,MainActivity.class);
                     startActivity(intent);
@@ -489,8 +523,17 @@ public class TreningRejestrowany extends AppCompatActivity {
                    // }
 
 
-                    wysokosc = location.getAltitude();
-                    wysokosc = Math.round(wysokosc * 100.0) / 100.0;
+                    wysokoscEnd = location.getAltitude();
+                    if(wysokoscEnd >= wysokoscStart){
+                        wysokoscUp = wysokoscUp + (wysokoscEnd-wysokoscStart);
+                    }
+                    else {
+                        wysokoscDown = wysokoscDown + (wysokoscStart-wysokoscEnd);
+                    }
+
+                    wysokoscStart = wysokoscEnd;
+
+
                     Log.i("dziala","Szerokosc A: " + szerA);
                     Log.i("dziala","Szerokosc B: "+ szerB);
 
@@ -505,7 +548,7 @@ public class TreningRejestrowany extends AppCompatActivity {
 
                     if(dystansCalkowity >= 0.01){
                         //tSrednia = tUpdate/(Double.valueOf(dystansCalkowity).longValue());
-                        tSrednia = ((min * 60) + sec)/dystansCalkowity;
+                        tSrednia = ((hours*3600)+(min * 60) + sec)/dystansCalkowity;
                         secSrednia = (int) (tSrednia);
                         minSreadnia = secSrednia/60;
                         secSrednia = secSrednia%60;
@@ -519,11 +562,20 @@ public class TreningRejestrowany extends AppCompatActivity {
                         lastAutoLap = tUpdate;
 
                         secLapAuto = (int) (tDifferenceAuto/1000);
-                        minLapAuto = secLapAuto/60;
-                        secLapAuto = secLapAuto%60;
-                        miliSecLapAuto =(int) (tDifferenceAuto%100);
+                        if(secLapAuto<=3599) {
+                            minLapAuto = secLapAuto / 60;
+                            secLapAuto = secLapAuto % 60;
+                            miliSecLapAuto = (int) (tDifferenceAuto % 100);
+                            aktualnyAutoLapT = String.format("%02d",minLapAuto)+":"+String.format("%02d",secLapAuto) + ":"+String.format("%02d",miliSecLapAuto);
+                        }
+                        else {
+                            hoursLapAuto = secLapAuto / 3600;
+                            minLapAuto = (secLapAuto % 3600) / 60;
+                            secLapAuto = (secLapAuto % 3600) % 60;
+                            miliSecLapAuto = (int) (tDifferenceAuto % 100);
+                            aktualnyAutoLapT = String.format("%02d",hoursLapAuto)+":"+String.format("%02d",minLapAuto)+":"+String.format("%02d",secLapAuto) + ":"+String.format("%02d",miliSecLapAuto);
+                        }
 
-                        aktualnyAutoLapT = String.format("%02d",minLapAuto)+":"+String.format("%02d",secLapAuto) + ":"+String.format("%02d",miliSecLapAuto);
                         mAutoLap.setText(aktualnyAutoLapT);
                         caloscAutoLap = caloscAutoLap + aktualnyAutoLapT + " - " + dystansAutoLap + "- " + szerTest.toString() + ", " + dlugTest.toString() + "\n";
 
@@ -554,6 +606,11 @@ public class TreningRejestrowany extends AppCompatActivity {
                     dlugB = location.getLongitude();
                     trasaSzer = trasaSzer + szerB.toString() + ",";
                     trasaDlug = trasaDlug + dlugB.toString() + ",";
+                    wysokoscStart = location.getAltitude();
+                    szerTest = szerB;
+                    dlugTest = dlugB;
+                    caloscAutoLap = caloscAutoLap + "00:00:00" + " - " + "0.00 km" + "- " + szerTest.toString() + ", " + dlugTest.toString() + "\n";
+
                 }
             });
         }
@@ -577,17 +634,28 @@ public class TreningRejestrowany extends AppCompatActivity {
             tMiliSec = SystemClock.uptimeMillis() - tStart;
             tUpdate = tBuff+ tMiliSec;
             sec = (int) (tUpdate/1000);
-            min = sec/60;
-            sec = sec%60;
-            miliSec =(int) (tUpdate%100);
-            mStoper.setText(String.format("%02d",min)+":"+String.format("%02d",sec) + ":"+String.format("%02d",miliSec));
+            if(sec<=3599) {
+                min = sec / 60;
+                sec = sec % 60;
+                miliSec = (int) (tUpdate % 100);
+                mStoper.setText(String.format("%02d", min) + ":" + String.format("%02d", sec) + ":" + String.format("%02d", miliSec));
+            }
+            else {
+                hours = sec / 3600;
+                min = (sec % 3600) / 60;
+                sec = (sec % 3600) % 60;
+                miliSec = (int) (tUpdate % 100);
+                mStoper.setTextSize(60);
+                mStoper.setText(String.format("%02d", hours) + ":" + String.format("%02d", min) + ":" + String.format("%02d", sec) + ":" + String.format("%02d", miliSec));
+
+            }
             handler.postDelayed(this,60);
 
 
         }
     };
 
-    public Runnable GPSrunnable = new Runnable() {
+    /**public Runnable GPSrunnable = new Runnable() {
         @Override
         public void run() {
             KeyguardManager myKM = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
@@ -633,8 +701,8 @@ public class TreningRejestrowany extends AppCompatActivity {
                             // }
 
 
-                            wysokosc = location2.getAltitude();
-                            wysokosc = Math.round(wysokosc * 100.0) / 100.0;
+                            wysokoscStart = location2.getAltitude();
+                            wysokoscStart = Math.round(wysokoscStart * 100.0) / 100.0;
                             Log.i("dziala", "Szerokosc A: " + szerA);
                             Log.i("dziala", "Szerokosc B: " + szerB);
 
@@ -687,7 +755,7 @@ public class TreningRejestrowany extends AppCompatActivity {
         gpsHandler.postDelayed(this,4000);
 
     }
-    };
+    };**/
 
 
     protected void onPause() {
@@ -758,8 +826,9 @@ public class TreningRejestrowany extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        stopLocationUpdates();
-
+        //stopLocationUpdates();
+        mDystans.setText("0.00 km");
+        mStoper.setText("00:00:00");
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         finish();

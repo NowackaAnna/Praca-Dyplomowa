@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DB_NAME = "treningi_aplikacja_modyfikacja";
+    public static final String DB_NAME = "treningi_aplikacja_modyfikacja2";
     private static String DB_PATH = null;
     private static final int DB_VERSION = 1;
     public static final String TABLE_Twszystkie = "treningiwszystkie";
@@ -127,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //    contentValues.put("SrednieTempo", srednie_tempo);
     //    mDataBase.insert("treningiwszystkie", null, contentValues);
     //}
-    public void dodajTreningBiegowyWM(Integer nr_treningu,String data_treningu, String rodzaj,  Float dystans,String czas_trwania, String komentarz, String poszczegolne_odcinki, String srednie_tempo, String trasa_szerokosci, String trasa_dlugosci) {
+    public void dodajTreningBiegowyWM(Integer nr_treningu,String data_treningu, String rodzaj,  Float dystans,String czas_trwania, String komentarz, String poszczegolne_odcinki, String srednie_tempo, String trasa_szerokosci, String trasa_dlugosci, String wysokoscUp, String wysokoscDown) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("nr", nr_treningu);
@@ -140,6 +140,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("SrednieTempo", srednie_tempo);
         contentValues.put("TrasaSzer", trasa_szerokosci);
         contentValues.put("TrasaDlug", trasa_dlugosci);
+        contentValues.put("WysokoscUp", wysokoscUp);
+        contentValues.put("WysokoscDown", wysokoscDown);
         mDataBase.insert("treningiwszystkie", null, contentValues);
     }
     public void dodajTreningSprawnosciowyW(Integer nr_treningu,String data_treningu, String rodzaj, String czas_trwania, String tresc_treningu) {
@@ -150,7 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("Rodzaj", rodzaj);
         contentValues.put("Czas", czas_trwania);
         contentValues.put("TrescTreningu", tresc_treningu);
-        contentValues.put("Komentarz", "Brak komentarza");
+        contentValues.put("Komentarz", "");
         mDataBase.insert("treningiwszystkie", null, contentValues);
         //Log.i("zapis","zapisane");
     }
@@ -163,7 +165,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("Czas", czas_trwania);
         contentValues.put("ObciazenieLaczne", obciazenie_laczne);
         contentValues.put("TrescTreningu", tresc_treningu);
-        contentValues.put("Komentarz", "Brak komentarza");
+        contentValues.put("Komentarz", "");
         mDataBase.insert("treningiwszystkie", null, contentValues);
     }
     public void dodajTreningSilaBiegowaW(Integer nr_treningu,String data_treningu, String rodzaj, String czas_trwania, Float dystans, String tresc_treningu) {
@@ -175,7 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("Czas", czas_trwania);
         contentValues.put("Dystans", dystans);
         contentValues.put("TrescTreningu", tresc_treningu);
-        contentValues.put("Komentarz", "Brak komentarza");
+        contentValues.put("Komentarz", "");
         mDataBase.insert("treningiwszystkie", null, contentValues);
     }
     public void dodajTreningElementySzybkosciW(Integer nr_treningu, String data_treningu, String rodzaj, String czas_trwania, Float dystans, String tresc_treningu) {
@@ -187,7 +189,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("Czas", czas_trwania);
         contentValues.put("Dystans", dystans);
         contentValues.put("TrescTreningu", tresc_treningu);
-        contentValues.put("Komentarz", "Brak komentarza");
+        contentValues.put("Komentarz", "");
         mDataBase.insert("treningiwszystkie", null, contentValues);
     }
 

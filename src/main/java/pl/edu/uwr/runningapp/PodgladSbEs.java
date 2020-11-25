@@ -99,8 +99,12 @@ public class PodgladSbEs extends AppCompatActivity {
         mDystansTreninguSE.setText("Dystans: " + mDystansTreninguSSE);
         mCalkowityCzas = "Czas: " + mCzasTreninguSSE;
         mCzasTreninguSE.setText(mCalkowityCzas);
-
-        mCaloscTresciSE = mTrescTreninguSSE+ "\n" + "Komentarz: \n"+mKomentarzSSE + "\n";
+        if(mKomentarzSSE.equals("")){
+            mCaloscTresciSE = mTrescTreninguSSE;
+        }
+        else{
+            mCaloscTresciSE = mTrescTreninguSSE+ "\n" + "Komentarz: \n"+mKomentarzSSE + "\n";
+        }
 
         mTrescTreninguSE.setText(mCaloscTresciSE);
 

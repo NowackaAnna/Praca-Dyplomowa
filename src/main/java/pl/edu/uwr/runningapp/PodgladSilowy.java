@@ -101,7 +101,13 @@ public class PodgladSilowy extends AppCompatActivity {
         mObciazenieTreninguSilowy.setText(mObciazenieSilowy);
         mCalkowityCzasS = "Czas: " + mCzasTreninguSSilowy;
         mCzasTreninguSilowy.setText(mCalkowityCzasS);
-        mCaloscTresciSilowy = mTrescTreninguSSilowy+ "\n" + "Komentarz: \n"+mKomentarzSSilowy + "\n";
+        if(mKomentarzSSilowy.equals("")){
+            mCaloscTresciSilowy = mTrescTreninguSSilowy;
+        }
+        else {
+            mCaloscTresciSilowy = mTrescTreninguSSilowy+ "\n" + "Komentarz: \n"+mKomentarzSSilowy + "\n";
+        }
+
         mTrescTreninguSilowy.setText(mCaloscTresciSilowy);
 
         mDodajKomentarzSilowy.setOnClickListener(new View.OnClickListener() {

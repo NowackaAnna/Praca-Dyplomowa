@@ -50,6 +50,9 @@ public class PodgladBiegowy extends AppCompatActivity {
     String mDlugosci[];
     List<Location> savedLocation;
 
+    String mWysokoscUp;
+    String mWysokoscDown;
+
     Cursor CaloscTrening;
 
     @Override
@@ -107,6 +110,8 @@ public class PodgladBiegowy extends AppCompatActivity {
                 mTrescTreninguSBiegowy = CaloscTrening.getString(9);
                 mSzer = CaloscTrening.getString(10);
                 mDlug = CaloscTrening.getString(11);
+                mWysokoscUp = CaloscTrening.getString(12);
+                mWysokoscDown = CaloscTrening.getString(13);
             } while (CaloscTrening.moveToNext());
         }
         mRodzajTreninguBiegowy.setText(rodzajBiegowy);
