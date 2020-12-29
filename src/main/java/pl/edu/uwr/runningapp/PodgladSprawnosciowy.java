@@ -19,8 +19,6 @@ import android.widget.Toast;
 import java.io.IOException;
 
 public class PodgladSprawnosciowy extends AppCompatActivity {
-    TextView mRodzajTreninguSpr;
-    TextView mDataTreninguSpr;
     TextView mCzasTreninguSpr;
     TextView mTrescTreninguSpr;
     EditText mKomentarzSpr;
@@ -44,7 +42,6 @@ public class PodgladSprawnosciowy extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_podglad_sprawnosciowy);
-        getSupportActionBar().setTitle("Trening");
 
         Intent i = getIntent();
         Bundle b = i.getExtras();
@@ -56,8 +53,6 @@ public class PodgladSprawnosciowy extends AppCompatActivity {
         }
         Log.i("dziala",treningSpr);
 
-        mRodzajTreninguSpr = (TextView)findViewById(R.id.Rodzaj_podglad_textView_Spr);
-        mDataTreninguSpr = (TextView)findViewById(R.id.Data_podglad_textView_Spr);
         mCzasTreninguSpr = (TextView)findViewById(R.id.Czas_podglad_textView_Spr);
         mTrescTreninguSpr = (TextView)findViewById(R.id.Tresc_treningu_textView_Spr);
         mKomentarzSpr = (EditText) findViewById(R.id.Komentarz_podglad_editText_Spr);
@@ -91,9 +86,9 @@ public class PodgladSprawnosciowy extends AppCompatActivity {
                 mTrescTreninguSSpr = CaloscTrening.getString(9);
             } while (CaloscTrening.moveToNext());
         }
-        mRodzajTreninguSpr.setText(rodzajSpr);
-        mDataTreninguSpr.setText(mDataTreninguSSpr);
-        mCalkowityCzas = "Czas: " + mCzasTreninguSSpr;
+        getSupportActionBar().setTitle(mDataTreninguSSpr + ": Sprawność");
+
+        mCalkowityCzas = "Czas:\n" + mCzasTreninguSSpr+" min";
         mCzasTreninguSpr.setText(mCalkowityCzas);
 
         if(mKomentarzSSpr.equals("")){

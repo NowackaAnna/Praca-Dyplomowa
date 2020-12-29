@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -21,10 +22,11 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class TreningSprawnosciowy extends AppCompatActivity {
-    EditText mDataSpr;
+    TextView mDataSpr;
     EditText mCzasTreninguSpr;
     EditText mTrescTreninguSpr;
     String mRodzajSpr;
+    String date = "";
     Button mZapiszSpr;
     Integer ilosc_treningow;
     Integer id_treningu;
@@ -37,7 +39,7 @@ public class TreningSprawnosciowy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trening_sprawnosciowy);
         getSupportActionBar().setTitle("Trening Sprawnościowy");
-        mDataSpr = (EditText)findViewById(R.id.Data_editText);
+        mDataSpr = (TextView) findViewById(R.id.Data_editText);
         mCzasTreninguSpr = (EditText)findViewById(R.id.Czas_trwania_editText);
         mTrescTreninguSpr = (EditText)findViewById(R.id.Tresc_treningu_editText);
         mZapiszSpr = (Button) findViewById(R.id.Zapisz_button);
@@ -84,7 +86,6 @@ public class TreningSprawnosciowy extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                         month = month+1;
-                        String date;
                         if (month<10) {
                             if (day<10) {
                                 date = year + "-0" + month + "-0" + day;
@@ -102,6 +103,7 @@ public class TreningSprawnosciowy extends AppCompatActivity {
                             }
                         }
                         mDataSpr.setText(date);
+
                     }
                 }, year, month, day);
                 datePickerDialog.show();
@@ -130,7 +132,6 @@ public class TreningSprawnosciowy extends AppCompatActivity {
                     poprawnosc = FALSE;
                 }
                 if(poprawnosc == TRUE) {
-
                     mDBHelper.dodajTreningSprawnosciowyW(id_treningu,dataSpr, rodzajSpr,czasSpr,trescSpr);
                     //ilosc_treningow = mDBHelper.countWszystkieTreningi("treningiwszystkie",null,null,null,null,null,null);
                     Toast.makeText(getApplicationContext(),"Trening sprawnościowy został zapisany", Toast.LENGTH_LONG).show();

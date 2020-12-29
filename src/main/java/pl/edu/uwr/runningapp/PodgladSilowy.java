@@ -18,8 +18,6 @@ import android.widget.Toast;
 import java.io.IOException;
 
 public class PodgladSilowy extends AppCompatActivity {
-    TextView mRodzajTreninguSilowy;
-    TextView mDataTreninguSilowy;
     TextView mObciazenieTreninguSilowy;
     TextView mCzasTreninguSilowy;
     TextView mTrescTreninguSilowy;
@@ -42,12 +40,12 @@ public class PodgladSilowy extends AppCompatActivity {
     Integer treningISilowy;
 
     Cursor CaloscTrening;
+    Cursor CaloscTreningu2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_podglad_silowy);
-        getSupportActionBar().setTitle("Trening");
 
         Intent i = getIntent();
         Bundle b = i.getExtras();
@@ -58,8 +56,6 @@ public class PodgladSilowy extends AppCompatActivity {
 
         }
 
-        mRodzajTreninguSilowy = (TextView)findViewById(R.id.Rodzaj_podglad_textView_Silowy);
-        mDataTreninguSilowy = (TextView)findViewById(R.id.Data_podglad_textView_Silowy);
         mObciazenieTreninguSilowy = (TextView)findViewById(R.id.Obciazenie_podglad_textView_Silowy);
         mCzasTreninguSilowy = (TextView)findViewById(R.id.Czas_podglad_textView_Silowy);
         mTrescTreninguSilowy = (TextView)findViewById(R.id.Tresc_treningu_textView_Silowy);
@@ -95,11 +91,11 @@ public class PodgladSilowy extends AppCompatActivity {
                 mTrescTreninguSSilowy = CaloscTrening.getString(9);
             } while (CaloscTrening.moveToNext());
         }
-        mRodzajTreninguSilowy.setText(rodzajSilowy);
-        mDataTreninguSilowy.setText(mDataTreninguSSilowy);
-        mObciazenieSilowy = "Obciążenie: "+ mObciazenieTreninguSilowy;
+        getSupportActionBar().setTitle(mDataTreninguSSilowy + ": Siła");
+
+        mObciazenieSilowy = "Obciążenie:\n"+ mObciazenieTreninguSSilowy + " kg";
         mObciazenieTreninguSilowy.setText(mObciazenieSilowy);
-        mCalkowityCzasS = "Czas: " + mCzasTreninguSSilowy;
+        mCalkowityCzasS = "Czas:\n" + mCzasTreninguSSilowy + "min";
         mCzasTreninguSilowy.setText(mCalkowityCzasS);
         if(mKomentarzSSilowy.equals("")){
             mCaloscTresciSilowy = mTrescTreninguSSilowy;
@@ -114,10 +110,26 @@ public class PodgladSilowy extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mDodawanyKomentarzSilowy = mKomentarzSilowy.getText().toString();
-                treningISilowy = Integer.parseInt(treningSilowy);
-                mDBHelper.updateKomentarz(mDodawanyKomentarzSilowy,treningISilowy);
-                Toast.makeText(getApplicationContext(), "Komentarz został dodany.", Toast.LENGTH_LONG).show();
-            }});
+                if(mDodawanyKomentarzSilowy.equals("")){
+                    Toast.makeText(getApplicationContext(), "Dodawany komentarz nie może być pusty.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    mKomentarzSSilowy = mKomentarzSSilowy + "\n" + mDodawanyKomentarzSilowy;
+                    treningISilowy = Integer.parseInt(treningSilowy);
+                    mDBHelper.updateKomentarz(mKomentarzSSilowy, treningISilowy);
+                    Toast.makeText(getApplicationContext(), "Komentarz został dodany.", Toast.LENGTH_LONG).show();
+                    CaloscTreningu2 = mDBHelper.queryPodgladTreningu(treningSilowy);
+                    if (CaloscTreningu2.moveToFirst()) {
+                        do {
+                            mKomentarzSSilowy = CaloscTreningu2.getString(5);
+                            mTrescTreninguSSilowy = CaloscTreningu2.getString(9);
+                        } while (CaloscTreningu2.moveToNext());
+                    }
+                    mCaloscTresciSilowy = mTrescTreninguSSilowy + "\n" + "Komentarz:" + mKomentarzSSilowy;
+                    mTrescTreninguSilowy.setText(mCaloscTresciSilowy);
+                    mKomentarzSilowy.setText("");
+                }}}
+                );
         mUsunSilowy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

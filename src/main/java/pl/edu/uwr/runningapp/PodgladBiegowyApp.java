@@ -14,6 +14,8 @@ public class PodgladBiegowyApp extends Application {
     public List<Location> getmLocations(){
         return mLocations;
     }
+    public List<Location> setmLocations(){mLocations = new ArrayList<>();
+    return mLocations;}
 
 
     public PodgladBiegowyApp getInstance(){

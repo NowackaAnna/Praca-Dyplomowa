@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#25B2FF</color>
-    <color name="colorPrimaryDark">#678ECD</color>
-    <color name="colorAccent">#5ECDC3</color>
+    <color name="colorPrimary">#007ef0</color>
+    <color name="colorPrimaryDark">#0058a8</color>
+    <color name="colorAccent">#85c5ff</color>
 
     <color name="my_app_primary_variant_color">#E5B3EE</color>
     <color name="my_app_secondary_variant_color">#7298F8</color>
-    <color name="my_app_surface_color">#91E0FF</color>
+    <color name="my_app_surface_color">#85c5ff</color>
     <color name="my_app_surface_color2">#CD6C6C</color>
     <color name="my_app_color_on_primary">#C1FABF</color>
     <color name="my_app_color_on_secondary">#3F51B5</color>
     <color name="my_app_color_on_background">#6EDDD3</color>
     <color name="my_app_color_on_error">#FCA7A1</color>
     <color name="my_app_color_on_surface">#E6F1EF</color>
+    <color name="colorSprawnosciowy">#5cb1ff</color>
+    <color name="colorSB">#c2e2ff</color>
+    <color name="colorES">#38a0ff</color>
+    <color name="colorBiegowy">#8fcaff</color>
+    <color name="colorSilowy">#66b6ff</color>
+    <color name="colorDziennikTekst">#000d66</color>
 </resources>

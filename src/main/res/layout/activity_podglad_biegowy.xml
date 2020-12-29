@@ -1,188 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/my_app_surface_color"
     android:orientation="vertical"
     android:screenOrientation="portrait"
-    android:scrollbars="vertical"
-    tools:context=".PodgladBiegowy">
-
-    <TextView
-        android:id="@+id/Rodzaj_podglad_textView_Biegowy"
+    android:scrollbars="vertical">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="Rodzaj Treningu"
-        android:textColor="#000066"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Data_podglad_textView_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="Data treningu: "
-        android:textColor="#a9a9a9"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Rodzaj_podglad_textView_Biegowy" />
-
-    <TextView
-        android:id="@+id/Dystans_podglad_textView_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="Dystans: "
-        android:textColor="#a9a9a9"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Data_podglad_textView_Biegowy" />
-
-    <TextView
-        android:id="@+id/Czas_podglad_textView_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="Czas: "
-        android:textColor="#a9a9a9"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Dystans_podglad_textView_Biegowy" />
-
-    <TextView
-        android:id="@+id/Tresc_treningu_podglad_textView_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="@string/tresc_treningu"
-        android:textColor="#a9a9a9"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Czas_podglad_textView_Biegowy" />
-
-    <TextView
-        android:id="@+id/Tresc_treningu_textView_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="70dp"
-        android:textColor="#a9a9a9"
-        android:textSize="15sp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:screenOrientation="portrait"
         android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Tresc_treningu_podglad_textView_Biegowy" />
+        tools:context=".PodgladBiegowy"
+        android:background="@color/my_app_surface_color">
 
 
-    <TextView
-        android:id="@+id/Komentarz_podglad_textView_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="@string/Komentarz"
-        android:textColor="#a9a9a9"
-        android:textSize="25sp" />
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
-    <EditText
-        android:id="@+id/Komentarz_podglad_editText_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:height="100dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:ems="10"
-        android:scrollbars="vertical"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:textColor="#a9a9a9"
-        android:textSize="20sp" />
+            <TextView
+                android:id="@+id/Czas_podglad_textView_Biegowy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:width="100dp"
+                android:height="100dp"
+                android:background="@drawable/textview_design_circle"
+                android:baselineAligned="true"
+                android:gravity="center|center_horizontal"
+                android:text="Czas: "
+                android:textAlignment="center"
+                android:textColor="@color/my_app_color_on_surface"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/Dodaj_komentarz_button_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="@string/Dodaj_komentarz"
-        android:textColor="#a9a9a9"
-        android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/Pokaz_mapa_button_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="@string/pokaz_mapa"
-        android:textColor="#a9a9a9"
-        android:textSize="25sp" />
+            <TextView
+                android:id="@+id/Dystans_podglad_textView_Biegowy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:width="100dp"
+                android:height="100dp"
+                android:background="@drawable/textview_design_circle"
+                android:foregroundGravity="center_vertical|center"
+                android:gravity="center|center_horizontal|center_vertical"
+                android:text="Dystans: "
+                android:textAlignment="center"
+                android:textColor="@color/my_app_color_on_surface"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/Usun_trening_button_Biegowy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
-        android:height="30dp"
-        android:text="@string/Usun_trening"
-        android:textColor="#a9a9a9"
-        android:textSize="25sp" />
-</LinearLayout>
+            <TextView
+                android:id="@+id/Wysokosci_podglad_textView_Biegowy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="2"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:width="100dp"
+                android:height="100dp"
+                android:background="@drawable/textview_design_circle"
+                android:baselineAligned="true"
+                android:foregroundGravity="center"
+                android:gravity="center|center_horizontal"
+                android:text="Wysokosc: "
+                android:textAlignment="center"
+                android:textColor="@color/my_app_color_on_surface"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </GridLayout>
+
+        <TableLayout
+            android:id="@+id/tableSrednieTempo"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:scrollbars="vertical"
+            android:stretchColumns="*"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp">
+
+            <TableRow
+                android:layout_width="0dp"
+                android:height="30dp">
+
+                <TextView
+                    android:id="@+id/srednieTempo_view"
+                    android:layout_width="0dp"
+                    android:background="@drawable/textview_tresctreningu"
+                    android:padding="3dip"
+                    android:text="Średnie tempo"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/srednieTempo_wartosc"
+                    android:layout_width="0dp"
+                    android:background="@drawable/textview_tresctreningu"
+                    android:gravity="center"
+                    android:padding="3dip"
+                    android:text=""
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+            </TableRow>
+        </TableLayout>
+
+
+        <TextView
+            android:id="@+id/Tresc_treningu_podglad_textView_Biegowy"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:height="30dp"
+            android:background="@drawable/bg"
+            android:gravity="center"
+            android:text="@string/tresc_treningu"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/srednieTempo_view" />
+
+        <TextView
+            android:id="@+id/Tresc_treningu_textView_Biegowy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            android:paddingLeft="6dp"
+            android:paddingBottom="6dp"
+            android:background="@drawable/textview_tresctreningu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Tresc_treningu_podglad_textView_Biegowy" />
+
+
+        <Button
+            android:id="@+id/Pokaz_mapa_button_Biegowy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:height="30dp"
+            android:background="@drawable/button_podglad_design"
+            android:text="@string/pokaz_mapa"
+            android:textColor="@color/my_app_color_on_surface"
+            android:textSize="25sp"
+            android:textStyle="normal"/>
+
+        <TextView
+            android:id="@+id/Komentarz_podglad_textView_Biegowy"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:height="30dp"
+            android:background="@drawable/bg"
+            android:gravity="center"
+            android:text="@string/Komentarz"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/Komentarz_podglad_editText_Biegowy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:height="70dp"
+            android:background="@drawable/textview_tresctreningu"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHighlight="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textColorLink="@color/colorPrimaryDark"
+            android:textCursorDrawable="@drawable/coursor_design"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/Dodaj_komentarz_button_Biegowy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:height="30dp"
+            android:text="@string/Dodaj_komentarz"
+            android:background="@drawable/button_podglad_design"
+            android:textColor="@color/my_app_color_on_surface"
+            android:textSize="25sp"
+            android:textStyle="normal"/>
+
+        <Button
+            android:id="@+id/Usun_trening_button_Biegowy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:height="30dp"
+            android:text="@string/Usun_trening"
+            android:background="@drawable/button_podglad_design"
+            android:textColor="@color/my_app_color_on_surface"
+            android:textSize="25sp"
+            android:textStyle="normal"/>
+    </LinearLayout>
+</ScrollView>

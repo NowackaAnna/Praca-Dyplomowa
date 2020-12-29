@@ -18,8 +18,7 @@ import android.widget.Toast;
 import java.io.IOException;
 
 public class PodgladSbEs extends AppCompatActivity {
-    TextView mRodzajTreninguSE;
-    TextView mDataTreninguSE;
+
     TextView mDystansTreninguSE;
     TextView mCzasTreninguSE;
     TextView mTrescTreninguSE;
@@ -41,12 +40,12 @@ public class PodgladSbEs extends AppCompatActivity {
     Integer treningISE;
 
     Cursor CaloscTrening;
+    Cursor CaloscTreningu2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_podglad_sb_es);
-        getSupportActionBar().setTitle("Trening");
 
         Intent i = getIntent();
         Bundle b = i.getExtras();
@@ -57,8 +56,6 @@ public class PodgladSbEs extends AppCompatActivity {
 
         }
 
-        mRodzajTreninguSE = (TextView)findViewById(R.id.Rodzaj_podglad_textViewSE);
-        mDataTreninguSE = (TextView)findViewById(R.id.Data_podglad_textViewSE);
         mDystansTreninguSE = (TextView)findViewById(R.id.Dystans_podglad_textViewSE);
         mCzasTreninguSE = (TextView)findViewById(R.id.Czas_podglad_textViewSE);
         mTrescTreninguSE = (TextView)findViewById(R.id.Tresc_treningu_textViewSE);
@@ -94,10 +91,15 @@ public class PodgladSbEs extends AppCompatActivity {
                 mTrescTreninguSSE = CaloscTrening.getString(9);
             } while (CaloscTrening.moveToNext());
         }
-        mRodzajTreninguSE.setText(rodzajSE);
-        mDataTreninguSE.setText(mDataTreninguSSE);
-        mDystansTreninguSE.setText("Dystans: " + mDystansTreninguSSE);
-        mCalkowityCzas = "Czas: " + mCzasTreninguSSE;
+        if(rodzajSE.equals("Elementy Szybkości")){
+            getSupportActionBar().setTitle(mDataTreninguSSE+": Szybkość");
+        }
+        else {
+            getSupportActionBar().setTitle(mDataTreninguSSE + ": S.Biegowa");
+        }
+
+        mDystansTreninguSE.setText("Dystans:\n" + mDystansTreninguSSE + " m");
+        mCalkowityCzas = "Czas:\n" + mCzasTreninguSSE + " min";
         mCzasTreninguSE.setText(mCalkowityCzas);
         if(mKomentarzSSE.equals("")){
             mCaloscTresciSE = mTrescTreninguSSE;
@@ -112,9 +114,25 @@ public class PodgladSbEs extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mDodawanyKomentarzSE = mKomentarzSE.getText().toString();
-                treningISE = Integer.parseInt(treningSE);
-                mDBHelper.updateKomentarz(mDodawanyKomentarzSE,treningISE);
-                Toast.makeText(getApplicationContext(), "Komentarz został dodany.", Toast.LENGTH_LONG).show();
+                if (mDodawanyKomentarzSE.equals("")){
+                    Toast.makeText(getApplicationContext(), "Dodawany komentarz nie może być pusty.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    mKomentarzSSE = mKomentarzSSE + "\n" + mDodawanyKomentarzSE;
+                    treningISE = Integer.parseInt(treningSE);
+                    mDBHelper.updateKomentarz(mKomentarzSSE, treningISE);
+                    Toast.makeText(getApplicationContext(), "Komentarz został dodany.", Toast.LENGTH_LONG).show();
+                    CaloscTreningu2 = mDBHelper.queryPodgladTreningu(treningSE);
+                    if (CaloscTreningu2.moveToFirst()) {
+                        do {
+                            mKomentarzSSE = CaloscTreningu2.getString(5);
+                            mTrescTreninguSSE = CaloscTreningu2.getString(9);
+                        } while (CaloscTreningu2.moveToNext());
+                    }
+                    mCaloscTresciSE = mTrescTreninguSSE+ "\n" + "Komentarz:"+mKomentarzSSE;
+                    mTrescTreninguSE.setText(mCaloscTresciSE);
+                    mKomentarzSE.setText("");
+                }
             }});
         mUsunSE.setOnClickListener(new View.OnClickListener() {
             @Override

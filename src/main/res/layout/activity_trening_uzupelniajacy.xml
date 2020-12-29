@@ -4,7 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_weight="9"
+    android:background="@color/colorAccent"
     tools:context=".TreningUzupelniajacy">
+
+    <TextView
+        android:id="@+id/textView_uzupelniajacy"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center_horizontal"
+        android:text="@string/Wybierz_rodzaj_treningu"
+        android:textAlignment="center"
+        android:textColor="@color/my_app_color_on_surface"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/elementy_szybkosci_button"
@@ -15,9 +35,10 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:height="50dp"
+        android:background="@drawable/button_uzupelniajacy_design"
         android:text="@string/szybkosc"
-        android:background="@drawable/button_design"
+        android:textColor="@color/my_app_color_on_surface"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trening_sila_biegowa_button" />
@@ -31,12 +52,13 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:height="50dp"
+        android:background="@drawable/button_uzupelniajacy_design"
         android:text="@string/sprawnosc"
-        android:background="@drawable/button_design"
+        android:textColor="@color/my_app_color_on_surface"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_uzupelniajacy" />
 
     <Button
         android:id="@+id/trening_silowy_button"
@@ -47,9 +69,10 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:height="50dp"
+        android:background="@drawable/button_uzupelniajacy_design"
         android:text="@string/sila"
-        android:background="@drawable/button_design"
+        android:textColor="@color/my_app_color_on_surface"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trening_sprawnosciowy_button" />
@@ -63,10 +86,13 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="5dp"
         android:layout_marginRight="5dp"
-        android:height="50dp"
+        android:background="@drawable/button_uzupelniajacy_design"
         android:text="@string/sila_biegowa"
-        android:background="@drawable/button_design"
+        android:textColor="@color/my_app_color_on_surface"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/trening_silowy_button" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

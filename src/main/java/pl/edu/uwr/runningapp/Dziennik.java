@@ -3,11 +3,13 @@ package pl.edu.uwr.runningapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,8 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import static java.lang.Math.floorMod;
+
 public class Dziennik extends AppCompatActivity {
 
     ListView listView;
@@ -30,6 +34,7 @@ public class Dziennik extends AppCompatActivity {
     String mDystanse[];
     String mCzasy[];
     Integer mIndeksy[];
+    Integer mObciążenia[];
     Integer ilosc_treningowU;
     Integer ilosc_treningowB;
     Integer ilosc_treningow;
@@ -41,6 +46,7 @@ public class Dziennik extends AppCompatActivity {
     String tDystans;
     String indeksPodglad;
     String rodzajPodglad;
+    int color[];
 
 
     @Override
@@ -70,13 +76,16 @@ public class Dziennik extends AppCompatActivity {
             mCzasy = new String[1];
             mIndeksy = new Integer[1];
             images = new int[1];
+            mObciążenia = new Integer[1];
+            color = new int[1];
 
             mRodzaje[0] = "Brak zapisanych treningów";
-            mDaty[0] = "0";
-            mDystanse[0] = "";
-            mCzasy[0]="0";
+            mDaty[0] = "-----";
+            mDystanse[0] = "-----";
+            mCzasy[0]="-----";
             //mIndeksy[0] = -11001;
             images[0] = R.drawable.emptyp;
+            color[0] = R.color.colorPrimary;
 
         }
         else {
@@ -86,6 +95,8 @@ public class Dziennik extends AppCompatActivity {
             mCzasy = new String[ilosc_treningow];
             mIndeksy = new Integer[ilosc_treningow];
             images = new int[ilosc_treningow];
+            mObciążenia = new Integer[ilosc_treningow];
+            color = new int[ilosc_treningow];
 
             pozycja_w_tab = 0;
 
@@ -101,25 +112,43 @@ public class Dziennik extends AppCompatActivity {
                     tDystans = fDystans.toString();
                     mDystanse[pozycja_w_tab] = tDystans;
                     mCzasy[pozycja_w_tab] = WszystkieTreningi.getString(4);
+                    mObciążenia[pozycja_w_tab] = WszystkieTreningi.getInt(8);
                     pozycja_w_tab = pozycja_w_tab + 1;
                 } while (WszystkieTreningi.moveToNext());
             }
             for (int i = 0; i < ilosc_treningow; i++) {
                 if (mRodzaje[i].equals("Sprawnościowy")) {
-                    images[i] = R.drawable.sprawnoscp;
+                    images[i] = R.drawable.spr2;
+                    mDystanse[i] = "--------------";
+                    mCzasy[i] = mCzasy[i] + " min";
+                    color[i] = R.color.colorSprawnosciowy;
                 }
                 if (mRodzaje[i].equals("Siłowy")) {
-                    images[i] = R.drawable.silowaniap;
+                    images[i] = R.drawable.weightlifting2;
+                    mDystanse[i] = String.valueOf("Obciążenie: "+mObciążenia[i]) + " kg";
+                    mCzasy[i] = mCzasy[i] + " min";
+                    color[i] = R.color.colorSilowy;
                 }
                 if (mRodzaje[i].equals("Siła Biegowa")) {
-                    images[i] = R.drawable.silabiegowap;
+                    images[i] = R.drawable.moutainrun3;
+                    mDystanse[i] = "Dystans: " + mDystanse[i] + " m";
+                    mCzasy[i] = mCzasy[i] + " min";
+                    color[i] = R.color.colorSB;
                 }
                 if (mRodzaje[i].equals("Elementy Szybkości")) {
-                    images[i] = R.drawable.szybkoscp;
+                    images[i] = R.drawable.fastrun2;
+                    mDystanse[i] = "Dystans: " + mDystanse[i] + " m";
+                    mCzasy[i] = mCzasy[i] + " min";
+                    color[i] = R.color.colorES;
                 }
                 if (mRodzaje[i].equals("Bieganie")){
-                    images[i] = R.drawable.bieganiep;
+                    images[i] = R.drawable.run2;
+                    mDystanse[i] = "Dystans: " + mDystanse[i] + " km";
+                    color[i] = R.color.colorBiegowy;
                 }
+
+
+
             }
             Log.i("dziala", mRodzaje[0].toString());
         }
@@ -127,7 +156,7 @@ public class Dziennik extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),mRodzaje[0].toString(), Toast.LENGTH_LONG).show();
 
         listView = findViewById(R.id.listView);
-        DziennikAdapter adapter = new DziennikAdapter(this, mRodzaje,mDaty,mDystanse,mCzasy, images);
+        final DziennikAdapter adapter = new DziennikAdapter(this, mRodzaje,mDaty,mDystanse,mCzasy, images, color);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -139,21 +168,32 @@ public class Dziennik extends AppCompatActivity {
                 if(rodzajPodglad.equals("Sprawnościowy")){
                     Log.i("dziala",rodzajPodglad);
                     pokazTreningSprawnosciowy();
+                    mDBHelper.close();
+                    finish();
                 }
                 if(rodzajPodglad.equals("Siłowy")){
                     pokazTreningSilowy();
+                    mDBHelper.close();
+                    finish();
                 }
                 if(rodzajPodglad.equals("Siła Biegowa")){
                     pokazTreningSE();
+                    mDBHelper.close();
+                    finish();
                 }
                 if(rodzajPodglad.equals("Elementy Szybkości")){
                     pokazTreningSE();
+                    mDBHelper.close();
+                    finish();
                 }
                 if(rodzajPodglad.equals("Bieganie")){
                     pokazTreningBiegowy();
+                    mDBHelper.close();
+                    finish();
                 }
-                mDBHelper.close();
-                finish();
+                if(rodzajPodglad.equals("Brak zapisanych treningów")){
+                    listView.setClickable(false);
+                }
 
 
             }
@@ -167,14 +207,16 @@ public class Dziennik extends AppCompatActivity {
         String rDystanse[];
         String rCzasy[];
         int rImages[];
+        int rColors[];
 
-        DziennikAdapter(Context c, String rodzaje[], String daty[], String dystanse[], String czasy[], int imgs[]){
+        DziennikAdapter(Context c, String rodzaje[], String daty[], String dystanse[], String czasy[], int imgs[], int colors[]){
             super(c, R.layout.row_trening, R.id.textViewRodzaj, rodzaje);
             this.rRodzaje = rodzaje;
             this.rDaty = daty;
             this.rDystanse = dystanse;
             this.rCzasy = czasy;
             this.rImages = imgs;
+            this.rColors = colors;
 
         }
         @NonNull
@@ -193,6 +235,7 @@ public class Dziennik extends AppCompatActivity {
             mDataTreningu.setText(rDaty[position]);
             mDystansTreningu.setText(rDystanse[position]);
             mCzasTreningu.setText("Czas: "+rCzasy[position]);
+            row.setBackgroundColor(ContextCompat.getColor(getContext(), rColors[position]));
 
             return row;
 

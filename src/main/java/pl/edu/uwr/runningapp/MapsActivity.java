@@ -25,6 +25,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     List<Location> savedLocations;
     List<LatLng> latLngList = new ArrayList<>();
+    Integer indeks = 0;
+    Integer ostatni = 0;
 
 
 
@@ -39,6 +41,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         PodgladBiegowyApp podgladBiegowyApp = (PodgladBiegowyApp)getApplicationContext();
         savedLocations = podgladBiegowyApp.getmLocations();
+        ostatni = savedLocations.size();
+
     }
 
 
@@ -66,14 +70,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             latLngList.add(latLng);
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
-            markerOptions.visible(false);
+            if(indeks == 0){
+                markerOptions.visible(true);
+                markerOptions.title("Start");
+            }
+            else if(indeks == (ostatni-1)){
+                markerOptions.visible(true);
+                markerOptions.title("Koniec");
+            }
+            else {
+                markerOptions.visible(false);
+            }
             mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            indeks = indeks + 1;
         }
+        //LatLng latLng1 = latLngList.get(0);
+        //MarkerOptions markerOptions = new MarkerOptions();
+        //markerOptions.position(latLng1);
+        //markerOptions.visible(true);
+        //mMap.addMarker(markerOptions);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng1));
 
 
-        mMap.setMinZoomPreference(15);
-        Polyline polyline = mMap.addPolyline(new PolylineOptions().addAll(latLngList).clickable(false).width(30));
+        mMap.setMinZoomPreference(12);
+        Polyline polyline = mMap.addPolyline(new PolylineOptions().addAll(latLngList).clickable(false).width(22));
         polyline.setColor(Color.rgb(0,51,0));
     }
 }
