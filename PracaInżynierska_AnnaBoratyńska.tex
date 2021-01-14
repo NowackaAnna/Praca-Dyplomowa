@@ -44,6 +44,7 @@
 \usepackage{lipsum}  
 \usepackage{listings}
 \usepackage[toc,page]{appendix}
+\usepackage[normalem]{ulem}
 
 \definecolor{codegreen}{rgb}{0.5, 0.09, 0.09}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -131,6 +132,386 @@ Mobile application to recording runner's trening with training's diary function.
 	\Large \textbf{Streszczenie}
 \end{flushleft}
 \vspace{1cm}
-Celem niniejszej pracy jest stworzenie aplikacji dla biegaczy. Ma ona służyć zarówno do rejestracji treningu biegowego, jak i jako dziennik treningowy, do którego można zapisywać zarejestrowane treningi, dodawać jednostki uzupełniające, przeglądać je i usuwać. Najważniejszą cechą tej aplikacji ma być prostota użytkowania. Jest ona zaprojektowana m.in. z myślą o osobach, które dopiero zaczynają swoją przygodę z bieganiem i nie chcą jeszcze inwestować w drogi sprzęt - zegarki z modułem GPS. Ma ona też służyć osobom, które ze względów prywatnych powinny mieć zawsze przy sobie telefon - możemy mieć zarówno sprzęt do biegania, jak i możliwość komunikacji w jednym urządzeniu. Jest dobrym, czasowym zastępstwem, gdy mamy zgubiony/uszkodzony zegarek (do biegania). Warto zaznaczyć, że aplikacja specjalnie jest stworzona jako proste w obsłudze rozwiązanie tymczasowe, ponieważ częste, długookresowe bieganie z telefonem nie jest zalecane.\\ \\
-Aplikacja działa od razu po pobraniu, bez zakładania konta/logowania. Posiada lokalną bazę danych w której przechowywane są zarejestrowane treningi biegowe i dodane uzupełniające. Oprócz tego korzysta ona z modułu GPS oraz stopera. Wykorzystane narzędzia: Android Studio, SQLite/Firebase.
+
+Celem niniejszej pracy jest stworzenie aplikacji dla biegaczy. Ma ona służyć zarówno do rejestracji treningu biegowego, jak i jako dziennik treningowy, do którego można zapisywać zarejestrowane treningi, dodawać jednostki uzupełniające, przeglądać je i usuwać. Najważniejszą cechą tej aplikacji ma być prostota użytkowania. Jest ona zaprojektowana m.in. z myślą o osobach, które dopiero zaczynają swoją przygodę z bieganiem i nie chcą jeszcze inwestować w drogi sprzęt - zegarki z modułem GPS. Ma ona też służyć osobom, które ze względów prywatnych powinny mieć zawsze przy sobie telefon - możemy mieć zarówno sprzęt do biegania, jak i możliwość komunikacji w jednym urządzeniu. Jest dobrym, czasowym zastępstwem, gdy mamy zgubiony/uszkodzony zegarek (do biegania). Warto zaznaczyć, że aplikacja specjalnie jest stworzona jako proste w obsłudze rozwiązanie tymczasowe, ponieważ częste, długookresowe bieganie z telefonem nie jest zalecane.\\
+
+Aplikacja działa od razu po pobraniu, bez zakładania konta/logowania. Posiada lokalną bazę danych w której przechowywane są zarejestrowane treningi biegowe i dodane uzupełniające. Oprócz tego korzysta ona z modułu GPS oraz stopera. Wykorzystane narzędzia: Android Studio, SQLite.
+\newpage
+
+\begin{flushleft}
+	\Large \textbf{Krótki rozdział o bieganiu i sprzęcie (zegarki, aplikacje)}
+\end{flushleft}
+\vspace{1cm}
+
+\newpage
+\begin{flushleft}
+	\Large \textbf{Zegarki do biegania}
+\end{flushleft}
+\vspace{1cm}
+
+Zegarki do biegania są urządzeniami mającymi ułatwić rejestrację treningu. Ich głównym zadaniem jest mierzenie czasu i dystansu pokonanego podczas biegu. Wiele z nich ma mnóstwo dodatkowych funkcji i komponentów celem zwiększenia liczby badanych parametrów, większej personalizacji i lepszego dostosowania do potrzeb użytkownika. Trzema wiodącymi markami dostępnymi aktualnie na rynku są Suunto, Polar i Garmin. W kolejnych podrozdziałach zostały przedstawione ich trzy produkty, po jednym z każdej z nich.
+\vspace{1cm}
+\begin{flushleft}
+	\textbf{Suunto 9 Baro Titanum}
+\end{flushleft}
+
+Pierwszym z wybranych zegarków jest jeden z flagowych produktów firmy Suunto. Marka ta specjalizuje się w tworzeniu sprzętu sportowego w formie zegarków oraz oprogramowania do nich, dedykowanego do biegów trailowych, crossowych, górskich, czy triathlonu. Z reguły sportów trwających stosunkowo długo, o dużej intensywności i uprawianych w trudnym terenie. Swoje produkty opisują jako wytrzymałe, przystosowane do pracy w wymagających warunkach, estetyczne pod względem wzornictwa i nowoczesne.\\
+
+Suunto 9 Baro jest zegarkiem stworzonym z myślą o jak najdłuższej pracy na baterii przy zachowaniu dokładności śledzenia i określania dystansu. Zostało to rozwiązane poprzez zdefiniowanie trzech trybów pracy - Wydajność, Wytrzymałość i Ultra. Zapewniają one odpowiednio 25, 50 i 120 godzin rejestracji treningu przy włączonym odbiorniku GPS. Dzieje się tak dzieki zmianie częstości odczytów lokalizacji. Używając trybu Wydajność pozycja, aktualizowana jest co 5 sekund, w trybie Wytrzymałość co 1 minutę, a w Ultra - co 2 minuty. W takim wypadku korzystanie jedynie z odbiornika GPS nie pozwala na dokładne określenie przebytego dystansu, dlatego Suunto w swoich zegrkach wykorzystuje technologię Fused Track. Polega ona na pobieraniu oraz estymacji danych z czujników ruchu, w celu rejestracji zmiany położenia pomiędzy kolejnymi odczytami. Oprócz tego marka zaimplementowała w tym modelu funkcję Fused Speed, która dzięki połączeniu modułu GPS z nadgarstkowym czujnikiem przyspieszenia może bardzo dokładnie mierzyć prędkość biegu. Filtrowanie adaptacyjne sygnału z nadajnika w połączeniu z informacjami o przyspieszeniu zebranymi z sensora umożliwiają dokładniejszy odczyt prędkości podczas jednostajnego biegu i szybsze reagowanie jej zmiany.\\
+
+Według informacji na stronie producenta, GPS wykorzystuje technologię Sony, ma rozdzielczość 1 metra, czyli ok. 3 stopy oraz działa na częstotliwości 1575,42 MHz.\\
+
+Korzystając z Suunto 9 Baro użytkownik ma dostęp do ponad 80 trybów sportowych, dzięki którym może wybrać odpowiadający wykonywanej aktywności. Każdy z nich ma możliwość dodatkowej konfiguracji za pomocą aplikacji lub konta internetowego. Wpływa to na rodzaje parametrów pokazywanych na wyświetlaczu.\\
+
+W zależności od długości treningów, zegarek przechowuje około 60 takich jednostek w swojej pamięci, natomiast do pozostałych mamy dostęp po sparowaniu z dedykowaną aplikacją.\\
+
+Poza podstawowymi funkcjami, jakimi są właśnie rejestracja i zapisaywanie treningu, urządzenie marki Suunto ma wiele komponentów dodatkowych. Należą do nich m.in.:\\
+\begin{itemize}
+	\item Monitorowanie aktywności - zegarek za pomocą akcelerometru liczy kroki wykonane w ciągu dnia (łącznie z treningiem). Na tej podstawie obliczana jest ilość spalonych dotąd kalorii i przewidywana jest ich liczba w ciągu całego dnia.
+	\item Cele aktywności - urządzenie daje możliwość ustalenia łącznej liczby kroków, którą użytkownik chce wykonać w ciągu dnia. Jeśli taki cel zostanie osiągnięty, zegarek wyświetli specjalne powiadomienie z gratulacjami. Analogicznych ustawień można dokonać dla ilości spalonych kalorii.
+	\item Monitorowanie tętna jest rozbudowaną funkcjonalością ze względu na to, że możemy korzystać z wbudowanego czujnika nadgarstkowego, bądź też sparować zewnętrzy, zakładany na klatkę piersiową. Daje to możliwość wyświetlania tętna chwilowego na ekranie głównym zegarka, a następnie przejrzenia danych przedstawionych w formie wykresu z 12 godzin,przygotowanych na podstawie średniego tętna mierzonego w 24 minutowych okresach. Dzięki monitorowaniu tego parametru, podczas treningu możemy korzystać z definiowanych na jego podstawie stref intensywaności, co pomaga w dopasowaniu aktywności i regenaracji.
+	\item Monitorowanie snu jest realizowane dzięki danym z akcelerometru i pulsometru. Daje to możliwość kontroli czasu, jakości oraz trendów snu.
+	\item Trening interwałowy - funkcja dająca możliwość ustawienia szytwnych danych dotyczących dystansu i czasu planowanego treningu, razem z odległościami poszczególnych odcinków oraz przewidywanymi przerwami pomiędzy nimi.
+	\item Trasy - użytkownik może zaplanować trasę treningu w ramach konta internetowego, a następnie podczas synchronizacji wgrać ją na zegarek. Podczas aktywności należy wtedy włączyć nawigację i wybrać odpowiednią trasę.
+	\item Nawigacja według namiaru jest funkcją, która po włączeniu umożliwia korzystającemu podążanie do punktu, który widzi bądź wcześniej odszukanego na mapie. Może być wykorzystywana jako samodzielny kompas lub w połączeniu z papierową mapą.
+	\item Stoper - po wybraniu tej opcji, uruchamiany jest podstawowy stoper, bez rejestrowania aktywności i używania modułu GPS. Oprócz najprostszego zastosowania ma on także możliwość działania jako licznik, który odlicza wstecz od wybranego czasu.
+	\item Fused Alti umożliwia odczyty wyskości będące połączeniem danych zebranych z GPS oraz wbudowenego barometru.
+	\item Alarm burzowy, na postawie informacji zebranych z barometru, wyświetla ostrzeżenie o możliwym załamaniu pogody czy gwałtownej burzy.
+\end{itemize}
+
+Oprócz tego, zegarek ten ma wbudowany czujnik optyczny marki Valencell, nadajnik-odbiornik radiowy zgodny z technologią Bluetooth Smart o zasięgu 3 metrów, wysokościomierz działający w zakresie od 500 m p.p.m. do 9999 m n.p.m., kompas o rozdzielczości 1° oraz barometr.\\
+
+Dodatkowo, korzystając z tego urządzenia, użytkownik ma możliwość sparowania czujników zewnętrzych następujących typów:
+\begin{itemize}
+	\item Tętno
+	\item Rowerowy
+	\item Trening Siłowy (czujnik mocy)
+	\item Nożny
+\end{itemize}
+
+Całe urządzenie działa w temperaturze pracy od -20°C do 55°C, ładowanie akumulatora może odbywać się w zakresie od 0°C do 35°C, a przechowywanie od -30°C do 60°C. Zegarek jest wodoszczelny do 100 metrów. Wbudowana bateria jest litowo-jonowa.\\
+
+Cena tego urządzenia na stronie producenta w dniu 23.11.2020~r. wynosi 2549,15~zł.
+\vspace{1cm}
+\begin{flushleft}
+	\textbf{Polar M600}
+\end{flushleft}
+
+Kolejnym wybranym zegarkiem jest Polar M600, czyli urządzenie będące połączeniem zegarka sportowego i smartwatcha.
+System operacyjny Wear OS by Google, zapewnia kompatybilność z aplikacją mobilną Polar Flow zarówno na Android, jak i iOS. Zatem model ten daje dostęp do sportowych funkcji urządzeń marki Polar oraz praktycznych funkcjonalności Android Wear.\\
+
+Przy samodzielnym użytkowaniu zegarka, czyli bez połączenia z telefonem, użytkownik ma dostęp do takich funkcji, jak:
+\begin{itemize}
+	\item Stoper
+	\item Minutnik
+	\item Alarm
+	\item Licznik kroków
+	\item Pomiar tętna
+	\item Sprawdzanie harmonogramu na dany dzień
+	\item Trening z aplikcją Polar
+	\item Słuchanie muzyki zapisanej na M600
+	\item Korzystanie ze Sklepu Play (kiedy zegarek ma połączenie z sicią Wi-Fi)
+	\item Zmiana tarczy zegarka
+\end{itemize}
+Natomiast po konfiguracji z telefonem dodatkowo może korzystać z opcji:
+\begin{itemize}
+	\item Plan dnia
+	\item Kontakty
+	\item Znajdź mój telefon
+	\item Fit
+	\item Fit Workout
+	\item Latarka
+	\item Polar
+	\item Sklep Play
+	\item Ustawienia
+	\item Tłumacz
+	\item Pogoda
+	\item Synchronizacja danych treningowych z aplikacją Polar Flow
+	\item Odczywtywanie i odpowiadanie na wiadomości SMS
+	\item Odrzucanie połączeń przychodzących
+	\item Nawiązywanie połączeń
+	\item Odczytywanie i odpisywanie na wiadomości e-mail
+	\item Sterowanie odtwarzaczem muzyki w telefonie
+	\item Korzystanie z Asystenta Google w jednym z wybranych języków (angielski, francuski, niemiecki, japoński, koreański, portugalski)
+\end{itemize}
+
+Jedną z flagowych funkcji Polar M600 jest Polar Smart Coaching, która zapewnia informacje zwrotne na temat sprawności i aktualnych postępów w treningu oraz opytmalne wskazówki dotyczące rozwoju. Na jej działanie składa się praca następujących modułów:
+\begin{itemize}
+	\item Całodobowy pomiar aktywności, polegający na monitorowaniu jej za pomocą akcelerometru 3D rejestrującego ruchy ręką. Pomaga on w osiągnięciu założonego dziennego celu w liczbie wykonanych kroków, pokonanym dystansie, czy ilości spalonych kalorii, który można ustawić w aplikacji. Oprócz tego, moduł ten jest odpowiedzialny za wyświetlenie powiadomienia, gdy zarejestruje zbyt długi czas braku aktywności względem ustawoionego trybu.
+	Pondto urządzenie marki Polar z funkcją ciągłego monitorowania aktywności, dostarcza użytkownikowi informacji na temat snu. Są to m.in.:
+	\begin{itemize}
+		\item Łączna długość snu
+		\item Sen faktyczny, czyli czas od zaśnięcia do obudzenia z wyłączeniem przebudzeń
+		\item Informacje o przebudzeniach i ich czasie
+		\item Ciągłość snu opisywana w skali 1-5. Im niższy współczynnik, tym więcej przerw miało miejsce podczas snu.
+		Dodatkowo użytkownik ma możliwość samodzielnej oceny snu każego dnia.
+	\end{itemize}
+	\item Inteligenty licznik kalorii pozwala na precyzyjne określenie liczby saplonych kalorii, na podstawie danych użytkownika takich jak:
+	\begin{itemize}
+		\item Wiek, płeć, masa ciała, wzrost
+		\item Maksymalna wartość tętna
+		\item Intensywność treningów lub aktywności
+		\item Maksymalna zdolność organizmu do przyswajania tlenu (VO2max)
+	\end{itemize}
+	Daje on też możliwość sprawdzenia całkowitego wydatku energetycznego, w kilokaloriach, podczas treningu.
+	\item Trening Benefit jest modułem zapewniającym informacje zwrotne dotyczące przebiegu każego treningu. Dzięki nim użytkownik może lepiej zrozumieć korzyści płynące z danej aktywności. Aby mieć do nich dostęp, trening w strefach tętna, musi trwać co najmniej 10 minut. Funkcja odczytuje czas spędzony w poszczególnych przedziałach oraz liczbę kalorii salonych w każdym z nich.
+	\item Obciążenie treningowe to informacje zwrotne dotyczące forsowności danego treningu. Obliczane jest ono na podstawie zużycia podczas ćwiczeń źródeł energii, takich jak węglowodany czy białka. Opcja ta daje użytkownikowi możliwość porównywania ze sobą obciążeń z różnego typu treningów, np. długiego treningu kolarskiego o niskiej intensywności z treningiem biegowym. Oprócz tego, zależnie od obciążenia treningowego, wyświetlana jest przewidywana ilość czasu potrzebna na regenerację.
+	\item Program biegowy jest to gotowy i spersonalizowany plan, który ma pomóc użytkownikowi przgotować się do nadchodzących zawodów. Zależnie od dystansu określi on częstotliwość, intensywność i rodzaj treningów. Programy te oparte są na poziomie wydolności, predyspozycji, historii treningów użytkownika oraz czasie przygotowań.
+	\item Running Index to wskaźnik mający na celu ułatwienie monitorowania wahań kondycji podczas biegu. Pozwala on określić użytkownikowi maksymalny poziom efektywności treningu. Zapisując ten wskaźnik przez dłuższy okres może on sprawdzać swoje postępy. Poprawa świadczy o tym, że bieganie w danym tempie wymaga już mniej wysiłku bądź przy tym samym poziomie wysiłku tempo wzrasta.		
+\end{itemize}
+
+Poza tymi modułami zegarek Polar M600 posiada siedem domyślnych profili sportowych. Są to:
+\begin{itemize}
+	\item Ćwiczenia grupowe
+	\item Bieganie
+	\item Trening siłowy
+	\item Kolarstwo
+	\item Pływanie
+	\item Trening w budynku
+	\item Trening na zewnątrz
+\end{itemize}
+ 
+Każdy z nich odpowiada za pomiar i wyświetlanie parametrów zgodnych z wybraną aktywnością. W aplikacji lub serwisie Polar Flow użytkownik ma możliwość dodania profili indywidualnych bądź skonfigurowania już istaniejących. Jednocześnie w urządzeniu może być zapisane 20 takich opcji.\\
+
+Jedną z najważniejszych funkcji części tych profili jest obsługa wbudowanego systemu GPS. Umożliwia to dokładny pomiar prędkości, dystansu oraz wysokości nad poziomem morza. Dokładność nawigacji określana jest na ± 2\% odległości i ± 2 km/h prędkości. Moduł GPS odświeża lokalizację co 1 sekundę. Z uwagi na to czas pracy urządzenia przy włączonej rejestracji treningu to 8 godzin.
+
+Pomiędzy kolejnymi odczytami lokalizacji z GPS oraz podczas trenigu wewnątrz budynku do określenia dystansu używana jest funkcja pomiaru kadencji z nadgarstka.\\
+
+Pozostałe dane techniczne:
+\begin{itemize}
+	\item Procesor urządzenia to MediaTek MT2601, Dual-Core 1,2 GHz, oparty na ARM Cortex-A7
+	\item Typ baterii: Li-Po 500 mAh
+	\item Tempertaura pracy mieści się w zakresie -10°C do 50°C
+	\item Tempertaura ładownia od 0°C do 40°C
+	\item Wbudowane sensory to: akcelerometr, czujnik natężenia oświetlenia, żyroskop, emiter wibracji, mikrofon.
+\end{itemize}
+
+Cena zegarka Polar M600 wynosi (z dnia 27.11.2020~r.) 999,99~zł na stronie x-kom.pl.
+\vspace{1cm}
+\begin{flushleft}
+	\textbf{Garmin Forerunner 920XT}
+\end{flushleft}
+
+Trzecim zegarkiem wybranym do omówienia jest Garmin Forerunner 920XT, opisywany jako zaawansowany, mulitsportowy zeagrek GPS []. Marka Garmin jako wiodący dostawca urządzeń nawigacyjnych na całym świecie, określa swoje produkty w dwóch słowach - Najwyższa trwałość []. Takie też ma być rozpatrywane urządzenie. Funkcje podawane jako charakterystyczne dla tego zegarka, to:
+\begin{itemize}
+	\item Funkcja dynamiki biegu, dostarczająca informacji o rytmie, odchyleniu oraz czasie kontaktu z podłożem. Czas kontaktu z podłożem podawany jest w milisekundach. Oprócz tego na tarczy zegarka wyświela się strzała pokazująca, dla której stopy średni czas tego kontaktu jest dłuższy. Informacje o rytmie biegu ozanczają kadenecję uzyskaną podczas danego treningu. Wyrażana jest ona w ilości kroków na minutę. Na odchylenie składa się zarówno oscylacja pionowa, jak i pozioma. Obie określane są w centymetrach i podawane jako dystans pokonywany w górę i w dół lub w prawo i lewo w każdym kroku, odpowiednio dla pionowej i poziomej.
+	\item Urządzenie szacuje maksymalny pułap tlenowy.
+	\item Funkcja symulatora wyścigu polegająca na przeliczaniu i wyświetlaniu informacji w jakim czasie skończymy bieg na 5 km, 10 km, półmaraton i maraton, na podstawie aktualnego tempa, średniego tempa zarejestrowanego z dotychczas pokonanego dystansu, wartości tętna i pozostałych zgromadzonych informacji na temat kondycji i wytrenowania użytkownika.
+	\item Asystent odpoczynku - określa ile czasu powinniśmy przeznaczyć na odpoczynek i regenerację po aktywności i treningu, które wykonaliśmy w ciągu dnia.
+	\item Funckja dziennika ćwiczeń, polegająca na zapisywaniu w pamięci zegarka zrealizowanych jednostek treningowych.
+	\item Funkcja powiadomień z telefonu pozwalająca przeglądać e-maile, SMSy i inne alerty na zegarku.
+	\item Funkcje online, odpowiadające za przesyłanie danych do serwisu Garmin Connect, śledzenie na żywo i możliwość udostępniania danych w serwisach społecznośćiowych.[,].
+\end{itemize}
+
+Poza tym urządzenie to może służyć użytkownikowi jako monitoring dziennej aktywności poprzez rejestrację liczby kroków, przebiegu snu, czy ilości spalonych kalorii.\\
+
+Oprócz opisanej już wyżej funkcji dynamiki biegu, podczas takiego treningu zegarek zbiera informacje o czasie i długości przebiegniętego dystansu, długość kroku, tętnie, VO2 Max (maksymalnej wydolności organizmu), przewyższeniu względem wysokości startowej. Dzięki nim ocenia i wyświetla takie parametry, jak:
+\begin{itemize}
+	\item status treningu i jego efetky, określający jakie korzyści przyniosło użytkownikowi wykonanie danej jednostki, co poprawił, a nad czym musi jeszcze popracować
+	\item poziom wytrenowania i kondycji
+	\item czas potrzebny na regenerację
+	\item strefy tętna, w jakich użytkownik wykoanł dany trening, a co za tym idzie określa jaki miał on charakter (wytrzymałość ogólna, tempowa, szybkościowa itp.)
+	\item codzienne sugestie aktywności będące sporządzanymi na podstawie historii treningów i poziomu wytrenowania, informacje o tym jaki charakter powinien mieć trening wykonany danego dnia
+	\item ogólne informacje o kondycji organizmu na podstawie tętna, snu i regeneracji
+	\item Running Power, czyli dane o ogólnej energi wywtorzonej podczas biegu, na którą składają się:
+	\begin{itemize}
+		\item Kinetic Power (energia kinetyczna) - określana na podstawie prędkości uzyskanej podczas treningu
+		\item Potential Power (energia potencjalna) - określana na podstawie danych dotyczących wysokości, zarejestrowantch przez barometr
+		\item Vertical Oscillation Power (energia oscylacji pionowch) - określana na podstawie oscylacji pionowaych wykonywanych w każdym kroku
+		\item Horizontal Oscillation Power (energia oscylacji poziomych) - określana na podstawie oscylacji poziomych wykonywanych w każdym kroku
+		\item Wind/Air Power (moc wiatru) - określana na podstawie prędkości zmierzonej przez zegarek, informacji pobranych z serwisu pogodowego, danych zmierzonych przez barometr.
+	\end{itemize}
+\end{itemize}
+
+Powyższe funckcje są możliwe do zrealizowania dzięki wbudowanym czujnikom, takim jak akcelerometr, pulsometr, czujnik tętna, wysokościomierz barometryczny, kompas, GPS i GLONASS.\\
+
+Pozycja GPS przy silnym sygnale satelitów wskazywana jest z dokładnością do 3 metrów. Słabszy sygnał zmniejsza tę dokładność, dlatego Garmin Forerunner 920XT daje możliwość równoczesnego korzystania z systemu GPS i GLONASS.\\
+
+Inne parametry techniczne:
+\begin{itemize}
+	\item Czas pracy na baterii: 24 godziny w trybie GPS, 40 godzin w trybie UltraTrec (moduł GPS wyłączany i włączany co jakiś czas)
+	\item Klasa wodoszczelności: 5 ATM
+	\item Pamięć/Historia: 32 MB
+	\item Bateria litowo-jonowa [x].
+\end{itemize}
+
+Cena w sklepie x-kom.pl: 1439,00~zł (z dnia 03.12.2020~r.) [].
+\newpage
+
+\begin{flushleft}
+	\Large \textbf{Aplikacje - przegląd}
+\end{flushleft}
+\vspace{1cm}
+
+Aplikacje do biegania są rozwiązaniem zarówno dla osób biegających amatorsko, jak i wyczynowców. Zależnie od potrzeb danego zawodnika, sposób ich użytkowania może się różnić. Zdecydowana większość będzie korzystała z nich do rejestracji treningu, natomiast mogą one służyć także do analizy aktywności, jako wirtualny trener, czy też dzienniczek treningowy. Na rynku dostępnych jest ich równie wiele darmowych, jak i płatnych.\\
+
+Ogólnym zamysłem storzenia aplikacji do biegania, było aby oprócz mierzenia samego czasu aktywności, mogły także określać jej dystans. Wraz z rozwojem ich popularności, dodawane były kolejne funkcje, jak zapis treningów, różnego rodzaju analizy tempa i wysiłku oraz wskazówki, w którą stronę użytkownik powinien rozwijać swoje bieganie.\\
+
+Większość płatnych aplikacji, dostępna jest zarówno dla systemu Android, jak i iOS. Wybierając i przedstawiając poniższe aplikacje, skupiłam się przede wszystkim na tym, aby miały one wersję darmową, były proste w obsłudze, nie miały zbyt wielu modułów dodatkowych oraz są dostępne na platformie Android.
+\vspace{1cm}
+\begin{flushleft}
+	\textbf{Strava: Track Running, Cycling \& Swimming}
+\end{flushleft}
+
+Strava jest jedną z popularniejszych aplikacji do rejestracji, przechowywania i analizy treści treningu.
+Działa ona zarówno w połączeniu z zegarkiem z modułem GPS lub komputerem, jak i jako samodzielna aplikacja. Została ona stworzona po to, aby pomagać w treningach kolarzom oraz biegaczom.\\
+
+Aby skorzystać z tej aplikacji, należy zalogować się przy użyciu konta na Facebooku, Twiterze bądź konta Google. Po wyrażeniu zgód wymaganych do jej działania, użytkownik może przejść do korzystania z niej.\\
+
+W ramach wersji bezpłatnej, do wyboru są 24 profile sportowe. Każdy z nich służy do rejestracji innego typu treningu wraz z parametrami mu odpowiadającymi. Przykładowo, podczas biegu użytkownik może na bieżąco śledzić pokonany dystans, czas w jakim tego dokonuje, średnie tempo oraz międzyczasy kolejnych kilometrów. Oprócz tego, na ekranie ma także podgląd trasy, po której się porusza. Do zapisanej jednostki użytkownik ma dostęp po wejściu w swój profil w aplikacji. Tam też, po wybraniu odpowiedniego treningu ma on możliwość podejrzenia analiz stworzonych na jego podstawie, takich jak strefy tempa, czy tętna. Każdą taką aktywność można opublikować na swoim profilu w mediach społecznościowych w formie przygotowanego postu. Oprócz tego, każdy kto obserwuje profil danego użytkownika w aplikacji, może skomentować lub polubić jego wykonaną jednostkę treningową.
+Niestety, każdy rozpoczęty za pomocą Stravy pomiar musi zostać zapisany i ewentualnie usunięty może być dopiero po odszukaniu go pośród zrealizowanych treningów. Nie ma możliwości zresetowania go od razu po zatrzymaniu rejestracji.\\
+
+Strava nastawiona jest na tworzenie społeczności. Poprzez dodawanie znajomych bądź osób motywujących do obserwowanych, użytkownik może 'podglądać' ich treningi. Oprócz tego, może on dołączyć do utowrzonych już w aplikacji zespołów, czy klubów i brać udział we wspólnych treningach. Dołączenie jest stosunkowo proste, wystarczy wyświelić ekipy w pobliżu i po prostu klinąć $Join$ przy wybranej. Można także sprawdzić listę liderów danego zespołu, pokonywane przez nich dystanse oraz czas, w jakim to robią, czy też przejrzeć posty z ich treningów. Użytkownik może także wyszukiwać popoularne lub ciekawe w danym obszarze trasy.\\
+Aby nie tracić zapału i motywacji, aplikacja daje możliwość brania udziłu w wyzwaniach i obserwowania na bieżąco swoich postępów.\\
+
+Po wykupieniu subskrypcji, czyli płatnej wersji Starvy, oprócz funkcji opisanych powyżej, użytkownik ma możliwość:
+\begin{itemize}
+	\item Planowania i odkrywania tras
+	\item Dostępu do puplitu szkoleniowego
+	\item Dostępu do modułu zapobiegania kontuzjom z uwzględnieniem wysiłku
+	\item Korzystania z dokładnej analizy rytmu serca i pomiarów tętna podczas treningów (do tego potrzebne jest dodatkowe urządzenie z czujnikiem zewnętrznym)
+\end{itemize}
+
+Jeśli użytkownik nie korzysta z telefonu do rejestracji treningów, może używać aplikacji, jako dziennika treningowego i wgrywać do niej jednostki zarejestrowane np. zegarkiem z modułem GPS. Wtedy także ma możliwość wyświetlenia informacji, podglądu trasy i stworzonych na ich podstawie analiz, dotyczących danej aktywności.\\
+
+Dostęp do aplikacji - 15.12.2020~r.
+\vspace{1cm}
+\begin{flushleft}
+	\textbf{Sports Tracker - bieganie i jazda na rowerze}
+\end{flushleft}
+
+Jest to darmowa aplikacja mobilna stworzona przez Amer Sports Digital, mająca pomóc użytkownikowi rozwijać jego pasję do sportu [a].
+Po pobraniu aplikacji ze sklepu Google Play, należy utworzyć w niej konto podając adres e-mail lub zalogować się przez serwis Facebook.\\
+
+Na ekranie głównym, najbardziej widoczny jest łączny czas trwania aktywnośći w  danym miesiącu. Obok niego użytkownik ma podgląd na miniturkę kalendarza, na której w danym miesiącu, kropkami w odpowiednim kolorze, zaznaczone są typy aktywności. Oprócz tego przesuwając ekran w dół i w prawo, ma on możliwość wyświetlania kolejnych aktywności zrealizowanych przez osoby publiczne, obserwowane w aplikacji, bądź po sparowaniu konta z Faceookiem, znajomych z tego serwisu.\\
+
+Rejestracja treningu rozpoczyna się kliknięciem przycisku rozpoczęcia na ekranie głównym. Na początek użytkownik wybiera tryb nowej aktywności, spośród podanych około 90. Następnie może zaplanować trasę, którą będzie podążać lub ustawić wirtualny cel.
+Podczas treningu, na ekranie użytkowanik ma podgląd na czas trwania aktywności, pokonany dystans, prędkość, średnie tempo oraz trasę zaznaczoną na mapie. Jest to możliwe, ponieważ aplikacja korzysta z wbudowanego w telefonie modułu GPS [a]. Dodatkowo, na kolejnych może zobaczyć ilośc spalonych kalorii, czy wykonanych już kroków. Oprócz tego, ma możliwość wyświetlenia automatycznych międzyczasów, zmierzonych za pomocą aplikacji i podejrzenia kilku przedstawionych na tej podastwaie statystyk.
+Po zakończeniu, do każdej wykonanej aktywności użytkownik może dodać pamiątkowe zdjęcie oraz wybrać, czy ma ona zapisać się jako prywatna, dostępna tylko dla obserwsujących, czy publiczna.\\
+
+Oprócz standardowego rejestrowania treningu, można także dodać taką jednostkę ręcznie, za pomocą przycisku $+$. Po jego naciśnięciu użytkownik ma możliwość dodania zdjęcia, wybrania typu aktywności, uzupełnienia czasu jej trwania, dystansu i tym podobnych parametrów.\\
+
+Aplikacja ma także funkcję dziennika treningowego, dzięki czemu użytkownik ma dostęp do wszystkich swoich zarejestrowanych, czy dodanych treningów. Można je wyświetlać w formie listy lub kalendarza, gdzie kolejne aktywności zaznaczane są przy odpowiedniej dacie. Oprócz tego jest także opcja generowania na ich podstawie podsumownania, gdzie można zobaczyć łączną liczbę kilometrów, czasu aktywności z wybranego okresu.\\
+
+Poza funkcjami przeznaczonymi typowo do rejestracji i przechowywania treningów, Sports Tracker daje możliwość tworzenia społeczności poprzez odnajdywanie zajomych z serwisu Facebook, innych używających tej aplikacji i dodawanie ich do obserwowanych, dzięki temu użytkownik może mieć wgląd do ich aktywności.\\
+
+Użytkownik oprócz aplikacji, otrzymuje także dostęp do serwisu online, gdzie poprzez przegląderkę może przeglądać wszystkie swoje treningi. Ma on wtedy możliwośc wyślietlenie większej ilości informacji jednocześnie oraz lepszego przeanalizowania danej jednostki, czy też zestawienia jej z inną.\\
+
+Aplikacja jest komaptybilna z zegarkami Suunto. Podobnie jak opisywana wcześniej Strava, Sports Tracker może być używana do analizy i przechowywania treningów zarejstrowanych za ich pomocą. Użytkownik może też zakupić i skonfigurować dedykowany aplikacji czujnik pomiaru tętna oraz czujnik prędkości i kadencji. Daje to możliwość dokładniejszego pomiaru odpowiednich paramterów podczas treningów oraz zapewnia lepszą analizę aktywności [c].\\
+
+Sports Tracker ma także swoją płatną wersję premium. Po jej wykupieniu użytkownik może korzystać z nowych map terenowych, OpenStreetMap, krajobrazowych i kolarskich (OpenCycleMap), gdzie szczegółowo zaznaczone są ścieżki piesze i rowerowe, obsługi bez reklam.\\
+
+Dostęp do aplikacji - 31.12.2020~r.
+\vspace{1cm}
+\begin{flushleft}
+	\textbf{Running Tracker}
+\end{flushleft}
+
+Running Tracker jest aplikacją stworzoną przez Healthcare Apps w celu podniesienia motywacji do codziennego ruchu w postaci biegania, chodzenia lub joggingu. Ma to być aplikacja przeznaczona zarówno dla biegaczy, którzy traktują sport rekreacyjnie, jak i dla tych przygotowujących się do zawodów. Jak wszystkie poprzednie aplikacje można ją pobrać ze sklepu Google Play [a].\\
+
+Aby uruchomić aplikację, po jej zainstalowaniu, należy zalogować się przez konto Google. Następnym krokiem jest wybranie płci, wpisanie wagi i wzrostu w celu dokładniejszego określiania parametrów wysiłku, na przykład liczby spalonych kalorii.\\
+
+Na ekranie głównym, na pierwszym planie, wyświetlany jest diagram, na którym zaznaczany jest przebiegnięty dotąd dystans w stosunku do założonego celu tygodniowego. W tym miejscu użytkownik ma także możliwość ustawienia jego wartości. Poniżej wyświetlane są rekordy osiągnięte z tą aplikacją, do których zaliczają się:
+\begin{itemize}
+	\item najlepsze tempo, tzn. najlepszy rezultat osiągniętej prędkości mierzonej w minutach na kilometr
+	\item najdłuższy pokonany dystans
+	\item najdłuższy czas wysiłku.
+\end{itemize}
+Na samym dole w postaci kolorowych ikonek wyświetlone są łączne wartości:
+\begin{itemize}
+	\item pokonanych kilometrów
+	\item czasu treningów
+	\item ilości spalonych kalorii.	
+\end{itemize}
+Aby rozpocząć rejestrację treningu należy nacisnąć przycisk na środku ekranu $LET'S RUN$. Jeśli użytkownik używa aplikacji po raz pierwszy, musi on wyrazić zgodę na dostęp do lokalizacji. Wtedy GPS określi dokładnie jego lokalizację i zaznaczy ten punkt na mapie. Aby rozpocząć pomiar wystraczy nacisnąć przycisk $START$. Podczas aktywności wyświtelane są takie paremtry jak czas, trasa, dystans, tempo oraz liczba spalonych kalorii. Po zakończeniu, dodatkowo pokazywane są informacje o średniej i maksymalnej prędkości uzyskanej podczas danego treningu. Zakończona jednostka automatycznie zapisywana jest w historii.\\
+
+W zakładce $History$ użytkownik ma dostęp do wszytskich swoich zrealizowanych i zapisanych treningów, ułożonych chronologicznie. Po wybraniu jendego z nich, może go udostępnić w mediach społecznościowych wraz ze zdjęciem trasy, wykonanym przez siebie bądź wybranym z przygotowanej galerii.\\
+
+Dodatkowo w zakładce $Achievements$ wyświetlane są odznaki przyznane użytkownikowi przez aplikację odpowiednio za:
+\begin{itemize}
+	\item pokonanie kolejnych wyznaczonych przez aplikację dystansów
+	\item coraz dłuższy, wyznaczony czas aktywności
+	\item spalanie coraz większej liczby kalorii, wyznaczonych jako kolejne progi.
+\end{itemize}
+Ma to znacząco wpłynąć na poprawę motywacji do treningów oraz zwiększyć chęć korzystania z aplikacji.\\
+
+Oprócz tego w zakładce $Leaderboard$ znajduje się zestawienie użytkowników aplikacji pod względem ilości przebiegniętych kilometrów w trakcie tygodnia.\\
+
+Aplikacja jest też mocno nastwiona na to, aby zachęcać znajomych do korzystania z niej, poprzez udostępnianie linku do pobrania jej. 
+Dużym minusem jest na pewno spora ilość reklam wyświetlanych w aplikacji, które często pokazując się w pasku na górze ekranu, a także całkowicie przysłaniając widok. Czasem dzieje się tak w momencie, gdy użytkowik chce zapisać wykonany trening.\\
+
+Dostęp do aplikacji - 01.01.2021~r.
+
+\newpage
+
+\begin{flushleft}
+	\Large \textbf{run\sout{U}pp}
+\end{flushleft}
+\vspace{1cm}
+
+run\sout{U}pp jest aplikacją stworzoną w ramach tej pracy inżynierskiej. Sama nazwa ma być grą słów, stworzoną jako połączenie $run$ $App$, oznaczających $biegać$ i $aplikacja$ oraz wyrażenia $run$ $up$ tłumaczonego jako $podbiec$.
+Aplikacja dedykowana jest smartfonom działającym z systemem Android.\\
+
+Najważniejszymi założeniami było, aby:
+\begin{itemize}
+	\item Aplikacja służyła do rejestracji treningu biegowego
+	\item Została stworzona możliwość dodawania aktywności uzupełniających odpowiadających wykonywanym przez biegaczy
+	\item Posiadała funkcję dziennika treningowego gromadzącego wszystkie zapisane i dodane treningi
+	\item Aplikacja działała bez połączenia z internetem, ze wskazaniem na to, aby rejestracja, dodawanie, zapisywanie oraz dostęp do wykonanych treningów, w ogóle go nie wymagały
+	\item Była przejrzysta i prosta w obsłudze
+	\item Aplikacja działa od razu po pobraniu, czyli bez zakładania konta, czy logowania
+	\item Stanowiła prosty i niegenerujący kosztów zamiennik drogich sprzętów
+	\item Była odpowiednia dla biegaczy amatorów, sympatyków, jak i wyczynowców	
+\end{itemize}
+
+Po włączeniu aplikacji wyświetla nam się ekran główny. Na nim umiejscowione są trzy przyciski ROZPOCZNIJ TRENING, DODAJ TRENING i PRZEGLĄDAJ DZIENNICZEK.\\
+[TU BĘDZIE ZDJĘCIE]
+\\
+
+Po wybraniu pierwszej opcji, wyświetli nam się ekran, wyglądający jak na zdjęciu poniżej, gdzie możemy rozpocząć rejestrację treningu.\\
+[TU WSTAW ZDJĘCIA]
+\\
+
+\newpage
+
+\begin{flushleft}
+	\Large \textbf{Technologie}
+\end{flushleft}
+\vspace{1cm}
+
+Cała aplikacja została napisana w Javie, w środowisku Android Studio, ponieważ zgodnie z zamiarem jest ona przeznaczona dla smatfonów pracujących na systemie Android z API 14 (Ice Cream Sandwich) i nowszych. Jednak należy mieć na uwadze, że obecna wersja Google Maps, które wykorzystywane są do zoobrazowania trasy biegu na mapie, jest kompatybilna z system Android w wersji 4.1 (Jelly Bean) i nowszym. Z uwagi na to, w starszych wersjach nie ma możliwości korzystania z tej funkcji aplikacji~[].\\
+
+Przy tworzeniu aplikacji mobilnej dla systemu Android, do wyboru są właściwie trzy środowiska:
+\begin{itemize}
+	\item Android Studio
+	\item Xamarin
+	\item Eclipse z ADT
+\end{itemize}
+Zasadniczo, ostatnie z wymienionych nie jest już brane pod uwagę, gdyż przestało ono być wspierane i zalecana jest zmiana []. Do wyboru pozostają więc pierwsze dwa. Google jako swoje oficjalne środowisko przedstawia Android Studio. W związku z tym można znaleźć wiele tutoriali, książek, czy rozwiązań, które zostały stworzone spacjalnie dla niego. Korzystając z Xamarina, należy większość znalezionych informacji dostosować, do niego, przerabiając je tak, aby odpowiadały specyfice języka C\#. Xamarin bardzo dobrze integruje się ze środowiskiem Visual Studio. Jednak z uwagi na to, że to Android Studio jest wspierane przez Google, wszytskie nowe rozwiązania, które zostaną tam wprowadzone, np. wraz z pojawieniem się nowego Androida, muszą zostać doprowadzone do wersji z nim współdziałającej. Powoduje to opóźnienie rozwoju Xamarina względem Android Studio. W związku z tym do pracy nad swoją aplikacją, wybrałam środowsiko wspierane przez Google [].\\ 
+
+Instalacja Android Studio oraz jego obsługa jest dokładnie opisana w dokumetacji~[]. Wymagania sprzętowe i systemowe znajdują się również na oficjalnej stronie\\ $https://developer.android.com/studio/index.html$.
+
+Językiem dydykowanym do tworzenia aplikacji w środowisku Android Studio jest Java. Wszystkie klasy obsługujące odpowiednie aktywności
+zostały napisane właśnie za jego pomocą. Są dwie drogi zainstalowania i zaimpotrowania tego języka do środowiska. Można zrobić to ręcznie, pobierając aktualną wersję Javy SDK z oficjalnej strony $http://www.oracle.com/technetwork/java/javase/downloads/index.html$, instalując ją, a następnie podczas instalacji Android Studio, ustawiając ścieżkę do odpowiedniego folderu, w którym się znajduje. Drugą opcją jest rozpoczęcie całego procesu od pobrania Android Studio. Podczas instalacji środowiska, instalator wyświetli informacje o braku Java SDK i podstawi aktywny link prowadzący bezpośrenio do pobrania kompatybilnej wersji. Pomimo prostoty, ta droga ma tę wadę, że instalator nie zawsze wskazuje na wersję najnowszą.[] \\
+
+Poniżej zostały przedstawione technologie wykorzystne do obsługi konkretnych funkcji w aplikacji.\\
+
+Dystans pokonywany podczas treningu, mierzony jest za pomocą, wbudowanego w telefonie, modułu GPS. Do jego obsługi używam zaiportowanego, dedykowanego pakietu $com.google.android.gms.location$ []. Aby rejestracja i zapisywanie treningu mogło działać zgodnie z założeniami, czyli całkowicie bez dostępu do internetu, podczas danej aktywności tworzona jest lista lokalizacji, na podstwie których podczas przeglądania zapisanego treningu, użytkownik może wygenerować mapę swojego biegu. Do obsługi tej funkcjonalności stworzyłam specjalną klasę $MapsActivity$. Używam w niej funkcji z zaipotrowanego pakietu $com.google.android.gms.maps$ [].\\
+
+Zapisane treningi, zarówno te zarejestrowane za pomocą aplikacji, jak i te dodane ręcznie, przechowywane są w lokalnej bazie danych. Oznacza, to że w aplikacji stworzona jest baza danych bez żadnych zapisanych aktywności, do której użytkownik wpisuje swoje, poprzez urządzenie, na które aplikacja została pobrana. Baza danych, jak wcześniej zostało napisane jest lokalna, więc nie ma możliwości przenoszczenia danych. Jeśli użytkownik zmieni smartfon i ponownie pobierze na niego tę aplikację, to nie będzie miał możliwośi odzyskania, zapisanych na poprzednim telefonie danych, na temat swoich treningów. Takie rozwiązanie zostało wprowadzone, aby run\sout{U}pp, mogła działać zgodnie z założeniami, czyli bez potrzeby zakładania konta, logowania i dostępu do internetu podczas działania.
+
+Sama baza danych została stworzona przy użyciu narzędzia $DB Browser for SQLite$ działającego w technologi SQLite. SQLite z definicji jest systemem zarządzania relacyjnymi bazami danych [,]. Z poziomu aplikacji jest ona obsługiwana za pomocą stworzonej do tego celu klasy $DatabaseHelper$. W niej, za pomocą wbudowanych funkcji języka Java oraz środowiska Android Studio, zostały napisane polecenia, które odzwierciedlają instrukcje języka sql. Dzięki temu wszelkie operacje zapisywania, dodawania, wyświetlania, czy usuwania treningów są łatwo i szybko wykonywane.
+\newpage
+
+\begin{flushleft}
+	\Large \textbf{Testy}
+\end{flushleft}
+\vspace{1cm}
+\newpage
+
+\begin{flushleft}
+	\Large \textbf{Podsumowanie}
+\end{flushleft}
+\vspace{1cm}
+
 \end{document}
